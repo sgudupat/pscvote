@@ -7,14 +7,14 @@
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            tools:context=".SignInPageActivity"
+            tools:context=".SignUpPageActivity"
             >
 
         <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:hint="@string/Username"
+                android:hint="@string/emailAddress"
                 android:inputType="textEmailAddress"
                 android:id="@+id/emailAddress"
                 android:layout_alignParentTop="true"
@@ -25,21 +25,42 @@
         <EditText android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium"
-                  android:hint="@string/Password"
-                  android:inputType="textPassword"
-                  android:id="@+id/password"
+                  android:hint="@string/mobileNumber"
+                  android:id="@+id/mobileNumber"
                   android:layout_marginTop="47dp"
                   android:layout_below="@+id/emailAddress"
                   android:layout_alignParentStart="true"
+                  android:layout_alignParentEnd="true" android:inputType="number"/>
+
+        <EditText android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:hint="@string/Username"
+                  android:inputType="text"
+                  android:id="@+id/username"
+                  android:layout_below="@+id/mobileNumber"
+                  android:layout_alignParentStart="true"
+                  android:layout_marginTop="40dp"
+                  android:layout_alignParentEnd="true"/>
+
+        <EditText android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:hint="@string/Password"
+                  android:inputType="textPassword"
+                  android:id="@+id/password"
+                  android:layout_below="@+id/username"
+                  android:layout_alignParentStart="true"
+                  android:layout_marginTop="40dp"
                   android:layout_alignParentEnd="true"/>
 
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="@string/signInButton"
-                android:id="@+id/signIn"
-                android:layout_below="@+id/password"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="55dp"/>
+                android:hint="@string/signUpButton"
+                android:id="@+id/signUp"
+                android:layout_marginBottom="55dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 </LinearLayout>

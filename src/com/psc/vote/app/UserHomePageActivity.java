@@ -15,8 +15,13 @@ public class UserHomePageActivity extends Activity {
         setContentView(R.layout.main);
     }
 
-    public void signInLandingPage(View view){
-        Intent intent = new Intent(this,SignInPageActivity.class) ;
+    public void signInLandingPage(View view) {
+        Intent intent = new Intent(this, SignInPageActivity.class);
+        startActivity(intent);
+    }
+
+    public void signUpLandingPage(View view) {
+        Intent intent = new Intent(this, SignUpPageActivity.class);
         startActivity(intent);
     }
 }

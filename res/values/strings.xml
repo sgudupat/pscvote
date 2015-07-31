@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">vote</string>
-     <string name="Username">Username</string>
-     <string name="Password">Password</string>
-     
+    <string name="app_name">Vote</string>
+    <string name="log_in">Log In</string>
+    <string name="register">Register</string>
+
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="emailAddress">Email Address</string>
+    <string name="mobileNumber">91 1234567890</string>
+    <string name="signUpButton">Sign Up</string>
+    <string name="signInButton">Sign In</string>
 </resources>
