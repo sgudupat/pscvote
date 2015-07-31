@@ -9,17 +9,21 @@
             android:layout_height="fill_parent"
             tools:context=".SignInPageActivity"
             >
-        <TextView
+        <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="user name"
+                android:hint="@string/Username"
+                 android:inputType="text"
                 android:id="@+id/userName" android:layout_weight="0.07" android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true" android:layout_marginTop="45dp"
                 android:layout_alignParentEnd="true"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="password"
-                  android:id="@+id/password" android:layout_weight="0.07"
+        <EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" 
+                  android:hint="@string/Password"                 
+                 android:inputType="textPassword"
+                  android:id="@+id/password" 
+                  android:layout_weight="0.07"
                   android:layout_marginTop="47dp"
                   android:layout_below="@+id/userName" android:layout_alignParentStart="true"
                   android:layout_alignParentEnd="true"/>
