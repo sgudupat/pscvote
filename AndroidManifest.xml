@@ -12,8 +12,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignInPageActivity" android:label="@string/log_in"></activity>
-        <activity android:name=".SignUpPageActivity" android:label="@string/register"></activity>
-		 <activity android:name=".SearchActivity" android:label="@string/app_name"></activity>
-          <activity android:name=".ShowActivity" android:label="@string/app_name"></activity>
+ <activity android:name=".SignUpPageActivity" android:label="@string/Registration"></activity>
+        <activity android:name=".SearchActivity" android:label="@string/Search"></activity>
+          <activity android:name=".ShowActivity" android:label="@string/Showitem"></activity>
     </application>
 </manifest>

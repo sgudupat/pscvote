@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Vote</string>
-    <string name="log_in">Log In</string>
-    <string name="register">Register</string>
-
-    <string name="Username">Username</string>
-    <string name="Password">Password</string>
+    <string name="app_name">vote</string>
+     <string name="Username">Username</string>
+     <string name="Password">Password</string>
     <string name="emailAddress">Email Address</string>
     <string name="mobileNumber">91 1234567890</string>
     <string name="signUpButton">Sign Up</string>
     <string name="signInButton">Sign In</string>
+     <string name="lbl_username">Name:</string>
+      <string name="lbl_enter_username">Enter User Name</string>
+       <string name="mobile">mobile</string>
+     <string name="lbl_mbl">Mobile#</string>
+      <string name="lbl_enter_mbl">Enter Mobile Number</string>
+        <string name="he">He</string>
+     <string name="she">She</string>
+     <string name="lbl_gndr">Gender:</string>
+     <string name="lbl_age">Age Group:</string>
+     <string name="age">age</string>
+      <string name="submit">Verification</string>
+     <string name="cancel">Cancel</string>
+     <string name="Registration">Registration</string>
+     <string name="Search">SearchItem</string>
+      <string name="Showitem">ShowItem</string>
+     
 </resources>
