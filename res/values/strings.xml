@@ -23,5 +23,8 @@
     <string name="Registration">Registration</string>
     <string name="Search">SearchItem</string>
     <string name="Showitem">ShowItem</string>
+	  <string name="vote">verify</string>
+         <string name="vote2">vote</string>
+     
 
 </resources>
