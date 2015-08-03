@@ -40,6 +40,8 @@
                 android:id="@+id/signIn"
                 android:layout_below="@+id/password"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="55dp"/>
+                android:layout_marginTop="55dp"
+                android:nestedScrollingEnabled="false"
+                android:onClick="login"/>
     </RelativeLayout>
 </LinearLayout>

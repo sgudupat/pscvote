@@ -24,14 +24,9 @@ public class UserHomePageActivity extends Activity {
         Intent intent = new Intent(this, SignUpPageActivity.class);
         startActivity(intent);
     }
-	
-	  public void signInLandingPage(View view){
-        Intent intent = new Intent(this,SignInPageActivity.class) ;
-        startActivity(intent);
-    }
-    
-    public void Search(View view){
-        Intent intent = new Intent(this,SearchActivity.class) ;
+
+    public void searchPage(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
         startActivity(intent);
     }
 }

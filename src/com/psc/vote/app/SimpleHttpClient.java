@@ -1,21 +1,10 @@
-
 /**
- * 
+ *
  */
 package com.psc.vote.app;
 
-/**
- * @author Prabu
- *
- */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.logging.Logger;
-
+import android.os.StrictMode;
+import android.util.Log;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -27,11 +16,17 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Map;
 
 public class SimpleHttpClient {
- /** The time it takes for our client to timeout */
+    /** The time it takes for our client to timeout */
     public static final int HTTP_TIMEOUT = 30 * 1000; // milliseconds
+    private static String serverURL = "http://52.74.54.79:8080/vote";
 
     /** Single instance of our HttpClient */
     private static HttpClient mHttpClient;
@@ -56,36 +51,36 @@ public class SimpleHttpClient {
      * Performs an HTTP Post request to the specified url with the
      * specified parameters.
      *
-     * @param url The web address to post the request to
      * @param postParameters The parameters to send via the request
      * @return The result of the request
      * @throws Exception
      */
-    public static String executeHttpPost(String url, ArrayList<NameValuePair> postParameters) throws Exception {
-    	Log.i("SimpleHttpClient","inside");
-        System.out.println("url::"+url);
-        System.out.println("postParameters::"+postParameters);
+    public static String executeHttpPost(ArrayList<NameValuePair> postParameters) throws Exception {
+        Log.i("SimpleHttpClient", "inside");
+        String url = serverURL + "/vote/registerpost";
+        System.out.println("url::" + url);
+        System.out.println("postParameters::" + postParameters);
 
         BufferedReader in = null;
         try {
             HttpClient client = getHttpClient();
-            System.out.println("client::"+client);
+            System.out.println("client::" + client);
             Log.i("SimpleHttpClient::2", client.toString());
             HttpPost request = new HttpPost(url);
             Log.i("SimpleHttpClient::3", request.toString());
 
             UrlEncodedFormEntity formEntity = new UrlEncodedFormEntity(postParameters);
             Log.i("SimpleHttpClient::4", formEntity.toString());
-            System.out.println("request::"+request);
-            System.out.println("formEntity::"+formEntity);
+            System.out.println("request::" + request);
+            System.out.println("formEntity::" + formEntity);
             request.setEntity(formEntity);
-            System.out.println("request:2:"+request);
-
+            System.out.println("request:2:" + request);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            System.out.println("request:3:" + "Strict Mode assigned");
             HttpResponse response = client.execute(request);
-            System.out.println("response::"+response);
-
+            System.out.println("response::" + response.toString());
             Log.i("SimpleHttpClient::5", response.toString());
-
             in = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
             Log.i("SimpleHttpClient::6", in.toString());
 
@@ -102,19 +97,42 @@ public class SimpleHttpClient {
             }
             in.close();
 
-            Log.i("SimpleHttpClient","last");
+            Log.i("SimpleHttpClient", "last");
             String result = sb.toString();
-            Log.i("SimpleHttpClient :: result", result);
-
+            Log.i("SimpleHttpClient ::", result);
             return result;
-        }
-        finally {
+        } finally {
             if (in != null) {
                 try {
                     in.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Log.e("SimpleHttpClient",String.valueOf(e));
+                    Log.e("SimpleHttpClient", String.valueOf(e));
+                }
+            }
+        }
+    }
+
+    public static String executeHttpPost2() throws Exception {
+        Log.i("executeHttpPost2", "inside");
+        String url = serverURL + "/vote/register?username=%22sandeep%22&password=%22info%22";
+        System.out.println("url::" + url);
+
+        BufferedReader in = null;
+        try {
+            HttpClient client = getHttpClient();
+            HttpPost request = new HttpPost(url);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            HttpResponse response = client.execute(request);
+            System.out.println("response::" + response);
+            return response.toString();
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    Log.e("SimpleHttpClient", String.valueOf(e));
                 }
             }
         }
@@ -146,8 +164,7 @@ public class SimpleHttpClient {
 
             String result = sb.toString();
             return result;
-        }
-        finally {
+        } finally {
             if (in != null) {
                 try {
                     in.close();
@@ -157,7 +174,7 @@ public class SimpleHttpClient {
             }
         }
     }
-    
+
     public static Map<String, String> executeHttpGetMap(String url) throws Exception {
         BufferedReader in = null;
         try {
@@ -167,8 +184,7 @@ public class SimpleHttpClient {
             HttpResponse response = client.execute(request);
             Map<String, String> responseInfo = (Map<String, String>) response.getEntity().getContent();
             return responseInfo;
-        }
-        finally {
+        } finally {
             if (in != null) {
                 try {
                     in.close();

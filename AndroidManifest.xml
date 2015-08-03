@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.psc.vote.app"
-          android:versionCode="1"
-          android:versionName="1.0">
+          package="com.psc.vote.app" android:versionCode="1" android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
         <activity android:name=".UserHomePageActivity" android:label="@string/app_name">
             <intent-filter>
@@ -12,8 +13,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignInPageActivity" android:label="@string/log_in"></activity>
- <activity android:name=".SignUpPageActivity" android:label="@string/Registration"></activity>
+        <activity android:name=".SignUpPageActivity" android:label="@string/Registration"></activity>
         <activity android:name=".SearchActivity" android:label="@string/Search"></activity>
-          <activity android:name=".ShowActivity" android:label="@string/Showitem"></activity>
+        <activity android:name=".ShowActivity" android:label="@string/Showitem"></activity>
     </application>
 </manifest>
