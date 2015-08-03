@@ -19,7 +19,7 @@
                 android:id="@+id/emailAddress"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="45dp"
+                android:layout_marginTop="40dp"
                 android:layout_alignParentEnd="true"/>
 
         <EditText android:layout_width="wrap_content"
