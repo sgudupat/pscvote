@@ -2,6 +2,7 @@ package com.psc.vote.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -53,6 +54,7 @@ public class SignUpPageActivity extends Activity {
         Spinner age = (Spinner) findViewById(R.id.spinner);
         String ageValue = age.getSelectedItem().toString();
 
+        String deviceId  = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
         Log.i("register:", "register");
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("username", username.getText().toString()));
@@ -60,6 +62,7 @@ public class SignUpPageActivity extends Activity {
         postParameters.add(new BasicNameValuePair("mobile", mobile.getText().toString()));
         postParameters.add(new BasicNameValuePair("gender", genderValue));
         postParameters.add(new BasicNameValuePair("age", ageValue));
+        postParameters.add(new BasicNameValuePair("deviceId", deviceId));
         final String response = null;
         try {
             Log.i("register", "try");
@@ -80,7 +83,7 @@ public class SignUpPageActivity extends Activity {
             String resp = res.replaceAll("\\s+", "");
             Log.i("register", resp);
         } catch (Exception e) {
-            Log.e("register", e.getMessage());
+            Log.e("register", e.getMessage()+"");
         }
     }
 }
