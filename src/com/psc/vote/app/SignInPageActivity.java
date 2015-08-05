@@ -1,7 +1,10 @@
 package com.psc.vote.app;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,29 +30,27 @@ public class SignInPageActivity extends Activity {
             final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
             postParameters.add(new BasicNameValuePair("username", edit.getText().toString()));
             postParameters.add(new BasicNameValuePair("password", pwd.getText().toString()));
-            final String response = null;
+            final Context context = this;
             try {
                 Log.i("LoginPageActivity", "try");
                 new Thread(new Runnable() {
                     public void run() {
                         Log.i("Response 2:", "In New Thread");
                         try {
-                            String response2 = SimpleHttpClient.executeHttpPost("/login", postParameters);
-                            Log.i("Response 2:", response2);
+                            String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
+                            Log.i("Response:", response);
+                            if (response.contains("success")) {
+                                Intent intent = new Intent(context, SearchActivity.class);
+                                startActivity(intent);
+                                Log.i("inside otp if loop", "search activity started");
+                            }
                         } catch (Exception e) {
                             Log.i("Response 2:Error:", e.getMessage());
                         }
                     }
                 }).start();
-                Log.i("LoginPageActivity", "call done");
-                String res = response.toString();
-                Log.i("LoginPageActivity", res);
-                String resp = res.replaceAll("\\s+", "");
-                Log.i("LoginPageActivity", resp);
             } catch (Exception e) {
-                e.printStackTrace();
-                String errorMsg = e.getMessage();
-                Log.e("LoginPageActivity", errorMsg);
+                Log.e("LoginPageActivity", e.getMessage() + "");
             }
             Log.i("After process:", "Done");
         } catch (Exception e) {

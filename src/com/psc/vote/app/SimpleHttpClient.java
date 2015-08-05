@@ -95,8 +95,6 @@ public class SimpleHttpClient {
                 sb.append(line + NL);
             }
             in.close();
-
-            Log.i("SimpleHttpClient", "last");
             String result = sb.toString();
             Log.i("SimpleHttpClient ::", result);
             return result;
@@ -105,7 +103,6 @@ public class SimpleHttpClient {
                 try {
                     in.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
                     Log.e("SimpleHttpClient", String.valueOf(e));
                 }
             }
