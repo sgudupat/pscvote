@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings.Secure;
 import android.telephony.SmsManager;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -132,10 +131,10 @@ public class SignUpPageActivity extends Activity {
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
         // show it

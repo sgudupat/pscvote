@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
- <string-array name="age_array">
+    <string-array name="age_array">
         <item>1_10</item>
         <item>10_20</item>
+        <item>20_30</item>
         <item>30_40</item>
+        <item>40_50</item>
         <item>50_60</item>
+        <item>60_70</item>
         <item>70_80</item>
-          <item>1_10</item>
-        <item>10_20</item>
-        <item>30_40</item>
-        <item>50_60</item>
-        <item>70_80</item>
-          <item>1_10</item>
-        <item>10_20</item>
-        <item>30_40</item>
-        <item>50_60</item>
-        <item>70_80</item>
-  </string-array>
-  
- </resources>
+    </string-array>
+</resources>

@@ -23,11 +23,11 @@
     <string name="Registration">Registration</string>
     <string name="Search">SearchItem</string>
     <string name="Showitem">ShowItem</string>
-    <string name="vote">verify</string>
-    <string name="vote2">vote</string>
-	 <string name="que_name">Question</string>
-          <string name="que_tag">who is the prime minister of india?</string>
-          <string name="campaign">campaign</string>
-      <string name="anchor">anchor</string>
-     
+    <string name="recentSearch">Recent Search</string>
+    <string name="trending">Trending</string>
+    <string name="que_name">Question</string>
+    <string name="que_tag">who is the prime minister of india?</string>
+    <string name="campaign">campaign</string>
+    <string name="anchor">anchor</string>
+
 </resources>

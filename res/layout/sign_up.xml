@@ -100,7 +100,8 @@
                 android:id="@+id/cancel"
                 android:onClick="verification"/>
     </LinearLayout>
-    <LinearLayout android:id="@+id/linearLayout" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    <LinearLayout android:id="@+id/linearLayout" android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
                   android:orientation="horizontal" android:layout_below="@+id/age_block"
                   android:layout_alignStart="@+id/sbmit_block">
         <TextView android:id="@+id/password" android:layout_width="wrap_content" android:layout_height="wrap_content"
