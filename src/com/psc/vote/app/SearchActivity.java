@@ -103,4 +103,47 @@ public class SearchActivity extends Activity {
         items.add(new Product("HTC Wildfire S", "Eight thousand", "samsung  super model"));
         return items;
     }
+	 public void searchResult(View view) {
+		 
+		 EditText input=(EditText) findViewById(R.id.inputSearch);
+		  try {
+	            Log.i("triggerLogin:", "triggerLogin");
+	            final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+	            postParameters.add(new BasicNameValuePair("anchorName", input.getText().toString()));
+	          
+	            final String response2 = null;
+	            try {
+	                Log.i("LoginPageActivity", "try");
+	                new Thread(new Runnable() {
+	                    public void run() {
+	                        Log.i("Response 2:", "In New Thread");
+	                        try {
+	                             String response2 = SimpleHttpClient.executeHttpPost("/searchAnchor", postParameters);
+	                             Log.i("Response 2:", response2);
+	                           JSONObject jObject = new JSONObject(response2);
+	                           Log.d("dfd",jObject.toString());
+	           	             // JSONArray jArray = jObject.getJSONArray("myArray");
+	                          //  
+	                        } catch (Exception e) {
+	                            Log.i("Response 2:Error:", e.getMessage());
+	                        }
+	                    }
+	                }).start();
+	                Log.i("LoginPageActivity", "call done");
+	             /*   String res = response.toString();
+		               Log.i("LoginPageActivity", res);
+	               String resp = res.replaceAll("\\s+", "");
+	                Log.i("LoginPageActivity", resp);*/
+	                
+	            } catch (Exception e) {
+	                e.printStackTrace();
+	                String errorMsg = e.getMessage();
+	                Log.e("LoginPageActivity", errorMsg);
+	            }
+	            Log.i("After process:", "Done");
+	        } catch (Exception e) {
+	        }
+		 
+	 
+	 }
 }
