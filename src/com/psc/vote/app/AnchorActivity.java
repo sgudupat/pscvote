@@ -1,5 +1,10 @@
 package com.psc.vote.app;
 
+import java.util.ArrayList;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +18,11 @@ public class AnchorActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		Log.i("SignInPageActivity", "inside user anchor page");
 		setContentView(R.layout.anchor);
+		  Intent intent = getIntent();
+
+	        // fetch value from key-value pair and make it visible on TextView.
+		  String item   = intent.getStringExtra("campaignid");
+		  displayCampaign(item);
 		
 	}
 
@@ -24,5 +34,26 @@ public class AnchorActivity extends Activity {
 		 
 	 
 	 }
+	 
+	  public void displayCampaign(String campaignId) {
+	        Log.i("displayCampaign:", "displayCampaign");
+	        final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+	        postParameters.add(new BasicNameValuePair("campaignId", campaignId));
+	        try {
+	            new Thread(new Runnable() {
+	                public void run() {
+	                    try {
+	                        String response = SimpleHttpClient.executeHttpPost("/getCampaign", postParameters);
+	                        Log.i("Response:", response);
+	                    } catch (Exception e) {
+	                        Log.i("Response 2:Error:", e.getMessage());
+	                    }
+	                }
+	            }).start();
+	        } catch (Exception e) {
+	            Log.e("register", e.getMessage() + "");
+	        }
+	    }
+ 
 
 }

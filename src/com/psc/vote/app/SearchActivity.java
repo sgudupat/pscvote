@@ -1,6 +1,17 @@
 package com.psc.vote.app;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.*;
+
 import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -8,142 +19,110 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 public class SearchActivity extends Activity {
 
-    // Search EditText
-    EditText inputSearch;
+	EditText inputSearch;
 
-    ArrayList<Product> items = new ArrayList<Product>();
+	ArrayList<Product> items = new ArrayList<Product>();
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("SearchActivity", "inside user sign in page");
-        setContentView(R.layout.search);
-
-        String products[] = {"Dell Inspiron", "HTC One X", "HTC Wildfire S", "HTC Sense", "HTC Sensation XE",
-                "iPhone 4S", "Samsung Galaxy Note 800",
-                "Samsung Galaxy S3", "MacBook Air", "Mac Mini", "MacBook Pro"};
-
-        //lv = (ListView) findViewById(R.id.list_view);
-        final ListView listView = (ListView) findViewById(R.id.list_view);
-
-        // Adding items to listview
-        //adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
-        // 1. pass context and data to the custom adapter
-        MyAdapter adapter = new MyAdapter(this, generateData());
-
-        //2. setListAdapter
-        listView.setAdapter(adapter);
-
-        //lv.setAdapter(adapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Log.i("SearchActivity", "inside user sign in page");
+		setContentView(R.layout.search);
+		////buildListView();
+	}
 
 
-                                            @Override
-                                            public void onItemClick(AdapterView<?> parent, View view,
-                                                                    int position, long id) {
-                                                TextView listText = (TextView) view.findViewById(R.id.product_name);
-                                                String text = listText.getText().toString();
-                                                Intent intent = new Intent(SearchActivity.this, ShowActivity.class);
-                                                intent.putExtra("selected-item", text);
-                                                startActivity(intent);
-                                            }
-                                        }
-        );
+	private void buildListView() {
+		ListView listView = (ListView) findViewById(R.id.list_view);
+		// Adding items to listview
+		//adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
+		// 1. pass context and data to the custom adapter
+		Log.i("inside buildlist","listbuitl");
+		MyAdapter adapter = new MyAdapter(SearchActivity.this, generateData());
+		//2. setListAdapter
+		listView.setAdapter(adapter);
+		 //TODO: future code for going to campaign page
+		 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				// TODO Auto-generated method stub
+				TextView listText = (TextView) view.findViewById(R.id.product_value);
+				String text = listText.getText().toString();
+				Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
+				 intent.putExtra("campaignid", text);
+				//intent.putExtra("selected-item", text);
+				startActivity(intent);  
+			}
+		});
 
-        inputSearch = (EditText) findViewById(R.id.inputSearch);
-        Log.i("textchanged", "inside on text change");
+	}
 
-        /**
-         * Enabling Search Filter
-         * */
-        inputSearch.addTextChangedListener(new TextWatcher() {
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                int textlength = cs.length();
-                //SearchActivity.this.adapter.getFilter().filter(cs);
-                ArrayList<Product> temp = new ArrayList<Product>();
-                for (Product p : items) {
-                    if (textlength <= p.getPname().length()) {
-                        if (p.getPname().toLowerCase().contains(cs.toString().toLowerCase())) {
-                            temp.add(p);
-                        }
-                    }
-                }
-                MyAdapter adapter1 = new MyAdapter(SearchActivity.this, temp);
-                listView.setAdapter(adapter1);
-            }
+	private ArrayList<Product> generateData() {
+		try {
+			//Populate from Server
+			String anchors = getAnchors();
+			//Build the list
+			JSONArray jsonArray=new JSONArray(anchors);
+			for (int i = 0; i < jsonArray.length(); i++) {
+				JSONObject jsonobject = jsonArray.getJSONObject(i);
+				String aname = jsonobject.getString("anchor_name");
+				String client = jsonobject.getString("client_name");
+				String cname = jsonobject.getString("campaigns");
+				Log.i("anchor name", aname);
+				Log.i("client name", client);
+				Log.i("campaign name", cname);
+				JSONArray jsonArray2=new JSONArray(cname);
+				for (int j = 0; j < jsonArray2.length(); j++) {
+					Log.i("client id", "inside campaign");
+					JSONObject jsonobject2 = jsonArray2.getJSONObject(j);
+					Log.i("client id", "json object built");
+					String cid = jsonobject2.getString("campaign_id");
+					Log.i("client id", cid);
+					items.add(new Product(aname,client,cid));
+				}
+			}
+		} catch(Exception e) {
 
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                // TODO Auto-generated method stub
-            }
+		}
+		/*         //Log.i("phone", (String) json.get("anchor_name"));
 
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
-            }
-        });
-    }
 
-    private ArrayList<Product> generateData() {
-        items.add(new Product("Dell Inspiron", "Five thousand", "Dell phone"));
-        items.add(new Product("HTC One X", "Ten thousand", "Htc mega pixel"));
-        items.add(new Product("HTC Wildfire S", "Eight thousand", "Htc super model"));
-        items.add(new Product("HTC Sense", "Eight thousand", "Htc super model"));
-        items.add(new Product("HTC Sensation XE", "Eight thousand", "Htc super model"));
-        items.add(new Product("Samsung Galaxy Note 800", "Eight thousand", "samsung super model"));
-        items.add(new Product("Samsung Galaxy S3", "Eight thousand", "smasung galxy model"));
-        items.add(new Product("HTC Wildfire S", "Eight thousand", "samsung  super model"));
-        return items;
-    }
-	 public void searchResult(View view) {
-		 
-		 EditText input=(EditText) findViewById(R.id.inputSearch);
-		  try {
-	            Log.i("triggerLogin:", "triggerLogin");
-	            final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-	            postParameters.add(new BasicNameValuePair("anchorName", input.getText().toString()));
-	          
-	            final String response2 = null;
-	            try {
-	                Log.i("LoginPageActivity", "try");
-	                new Thread(new Runnable() {
-	                    public void run() {
-	                        Log.i("Response 2:", "In New Thread");
-	                        try {
-	                             String response2 = SimpleHttpClient.executeHttpPost("/searchAnchor", postParameters);
-	                             Log.i("Response 2:", response2);
-	                           JSONObject jObject = new JSONObject(response2);
-	                           Log.d("dfd",jObject.toString());
-	           	             // JSONArray jArray = jObject.getJSONArray("myArray");
-	                          //  
-	                        } catch (Exception e) {
-	                            Log.i("Response 2:Error:", e.getMessage());
-	                        }
-	                    }
-	                }).start();
-	                Log.i("LoginPageActivity", "call done");
-	             /*   String res = response.toString();
-		               Log.i("LoginPageActivity", res);
-	               String resp = res.replaceAll("\\s+", "");
-	                Log.i("LoginPageActivity", resp);*/
-	                
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	                String errorMsg = e.getMessage();
-	                Log.e("LoginPageActivity", errorMsg);
-	            }
-	            Log.i("After process:", "Done");
-	        } catch (Exception e) {
-	        }
-		 
-	 
-	 }
+		items.add(new Product("HTC One X","Ten thousand","Htc mega pixel"));
+		items.add(new Product("HTC Wildfire S","Eight thousand","Htc super model"));
+		items.add(new Product("HTC Sense","Eight thousand","Htc super model"));
+		items.add(new Product("HTC Sensation XE","Eight thousand","Htc super model"));
+		items.add(new Product("Samsung Galaxy Note 800","Eight thousand","samsung super model"));
+		items.add(new Product("Samsung Galaxy S3","Eight thousand","smasung galxy model"));
+		items.add(new Product("HTC Wildfire S","Eight thousand","samsung  super model"));
+		 */		return items;
+	}
+
+
+	public void searchResult(View view) {
+		buildListView();
+	}
+
+	private String getAnchors() {
+		EditText input=(EditText) findViewById(R.id.inputSearch);
+		Log.i("triggerLogin:", "triggerLogin");
+		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+		postParameters.add(new BasicNameValuePair("anchorName", input.getText().toString()));
+		try {
+			Log.i("LoginPageActivity", "try");
+			String response2 = SimpleHttpClient.executeHttpPost("/searchAnchor", postParameters);
+			Log.i("Response 2:", response2);
+			return response2;
+		} catch (Exception e) {
+			String errorMsg = e.getMessage() + "";
+			Log.e("LoginPageActivity", errorMsg);
+			return "fail";
+		}
+	}
 }
