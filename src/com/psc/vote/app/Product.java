@@ -2,46 +2,44 @@ package com.psc.vote.app;
 
 public class Product {
 
-    private String pname;
-    private String pvalue;
-    private String pdescription;
+    private String anchorName;
+    private String clientName;
+    private String campaignId;
 
-
-    public Product(String pname, String pvalue, String pdescription) {
+    public Product(String anchorName, String clientName, String campaignId) {
         super();
-        this.pname = pname;
-        this.pvalue = pvalue;
-        this.pdescription = pdescription;
+        this.anchorName = anchorName;
+        this.clientName = clientName;
+        this.campaignId = campaignId;
     }
 
-
-    public String getPname() {
-        return pname;
+    public String getAnchorName() {
+        return anchorName;
     }
 
-    public void setPname(String pname) {
-        this.pname = pname;
+    public void setAnchorName(String anchorName) {
+        this.anchorName = anchorName;
     }
 
-    public String getPvalue() {
-        return pvalue;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setPvalue(String pvalue) {
-        this.pvalue = pvalue;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public String getPdescription() {
-        return pdescription;
+    public String getCampaignId() {
+        return campaignId;
     }
 
-    public void setPdescription(String pdescription) {
-        this.pdescription = pdescription;
+    public void setCampaignId(String campaignId) {
+        this.campaignId = campaignId;
     }
 
     @Override
     public String toString() {
-        return "Product [pname=" + pname + ", pvalue=" + pvalue
-                + ", pdescription=" + pdescription + "]";
+        return "Product [anchorName=" + anchorName + ", clientName=" + clientName
+                + ", campaignId=" + campaignId + "]";
     }
 }

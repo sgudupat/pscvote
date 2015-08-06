@@ -5,13 +5,13 @@
     android:orientation="vertical" >
 
       <TextView
-        android:id="@+id/anchor"
+        android:id="@+id/campaignPage_AnchorName"
         android:layout_width="227dp"
         android:layout_height="51dp"
         android:text="AnchorName" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/campaignPage_ClientName"
         android:layout_width="231dp"
         android:layout_height="45dp"
         android:text="ClientName" />
@@ -20,7 +20,7 @@
         android:id="@+id/campaign_stats_view"
         android:layout_width="189dp"
         android:layout_height="wrap_content"
-        android:text="Statistics" />
+        android:text="Statistics" android:onClick="showStats"/>
     <LinearLayout
         android:id="@+id/otp_value"
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/fld_Question"
+            android:id="@+id/campaignPage_Question"
             android:layout_width="262dp"
             android:layout_height="wrap_content"
             android:hint="@string/que_tag" />
@@ -45,42 +45,36 @@
             android:layout_height="wrap_content"
             android:text="Options" />
 
- 
-     
-
 <RadioGroup 
-    android:id="@+id/statistics_op"
+    android:id="@+id/campaign_options"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"
     android:checkedButton="@+id/sound">
     
   <RadioButton
-      android:id="@+id/cambaign_opt1"
+      android:id="@+id/campaign_opt1"
       android:layout_width="238dp"
       android:layout_height="wrap_content"
-      android:onClick="onRadioButtonClicked"
-      android:text="NarendraModi" />
+      android:onClick="onRadioSelected"/>
 
-  <RadioButton
+    <RadioButton
+            android:id="@+id/campaign_opt2"
+            android:layout_width="233dp"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioSelected"/>
+
+    <RadioButton
+            android:id="@+id/campaign_opt3"
+            android:layout_width="233dp"
+            android:layout_height="wrap_content"
+            android:onClick="onRadioSelected"/>
+
+    <RadioButton
       android:id="@+id/campaign_opt4"
       android:layout_width="235dp"
       android:layout_height="wrap_content"
-      android:onClick="onRadioButtonClicked"
-      android:text="PranabMugarji" />
+      android:onClick="onRadioSelected"/>
 
-  <RadioButton
-      android:id="@+id/cambaign_opt3"
-      android:layout_width="233dp"
-      android:layout_height="wrap_content"
-      android:onClick="onRadioButtonClicked"
-      android:text="AravindGejrival" />
-
-  <RadioButton
-      android:id="@+id/cambaign_opt2"
-      android:layout_width="233dp"
-      android:layout_height="wrap_content"
-      android:onClick="onRadioButtonClicked"
-      android:text="RahulGandhi" />
  </RadioGroup>
   </LinearLayout>
   <LinearLayout
@@ -94,7 +88,6 @@
           android:layout_weight="0.72"
           android:text="Done"
           android:onClick="showResult" />
-
   </LinearLayout>
 
 </LinearLayout>

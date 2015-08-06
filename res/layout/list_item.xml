@@ -4,28 +4,26 @@
                 android:layout_height="wrap_content"
         >
 
-    <!-- Single ListItem -->
-
     <!-- Product Name -->
-    <TextView android:id="@+id/product_name"
+    <TextView android:id="@+id/anchor_name"
               android:layout_width="fill_parent"
               android:layout_height="wrap_content"
               android:padding="10sp"
               android:textSize="16dip"
               android:textStyle="bold"/>
     <TextView
-            android:id="@+id/product_value"
+            android:id="@+id/client_name"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_name"
+            android:layout_below="@+id/anchor_name"
             android:textSize="16dip"
             android:paddingLeft="5dp">
     </TextView>
     <TextView
-            android:id="@+id/product_description"
+            android:id="@+id/campaign_id"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_value"
+            android:layout_below="@+id/client_name"
             android:textSize="16dip"
             android:paddingLeft="5dp">
     </TextView>

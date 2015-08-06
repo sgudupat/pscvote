@@ -18,8 +18,6 @@ import java.util.ArrayList;
 
 public class SearchActivity extends Activity {
 
-    EditText inputSearch;
-
     ArrayList<Product> items = new ArrayList<Product>();
 
     @Override
@@ -30,22 +28,18 @@ public class SearchActivity extends Activity {
         ////buildListView();
     }
 
-
     private void buildListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
         // Adding items to listview
-        //adapter = new ArrayAdapter<String>(this, R.layout.list_item, R.id.product_name, products);
         // 1. pass context and data to the custom adapter
         Log.i("inside buildlist", "listbuitl");
         MyAdapter adapter = new MyAdapter(SearchActivity.this, generateData());
         //2. setListAdapter
         listView.setAdapter(adapter);
-        //TODO: future code for going to campaign page
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
-                TextView listText = (TextView) view.findViewById(R.id.product_value);
+                TextView listText = (TextView) view.findViewById(R.id.campaign_id);
                 String text = listText.getText().toString();
                 Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
                 intent.putExtra("campaignid", text);
@@ -53,7 +47,6 @@ public class SearchActivity extends Activity {
                 startActivity(intent);
             }
         });
-
     }
 
     private ArrayList<Product> generateData() {
