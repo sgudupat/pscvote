@@ -81,19 +81,7 @@ public class SearchActivity extends Activity {
                 }
             }
         } catch (Exception e) {
-
         }
-        /*         //Log.i("phone", (String) json.get("anchor_name"));
-
-
-		items.add(new Product("HTC One X","Ten thousand","Htc mega pixel"));
-		items.add(new Product("HTC Wildfire S","Eight thousand","Htc super model"));
-		items.add(new Product("HTC Sense","Eight thousand","Htc super model"));
-		items.add(new Product("HTC Sensation XE","Eight thousand","Htc super model"));
-		items.add(new Product("Samsung Galaxy Note 800","Eight thousand","samsung super model"));
-		items.add(new Product("Samsung Galaxy S3","Eight thousand","smasung galxy model"));
-		items.add(new Product("HTC Wildfire S","Eight thousand","samsung  super model"));
-		 */
         return items;
     }
 

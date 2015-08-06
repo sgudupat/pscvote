@@ -28,6 +28,6 @@
     <string name="que_name">Question</string>
     <string name="que_tag">who is the prime minister of india?</string>
     <string name="campaign">campaign</string>
-    <string name="anchor">anchor</string>
-
+    <string name="statistics_view">Statistics</string>
+    <string name="anchor">Anchor</string>
 </resources>

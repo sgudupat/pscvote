@@ -17,10 +17,10 @@
             android:text="ClientName"/>
 
     <Button
-            android:id="@+id/button1"
+            android:id="@+id/statisticsView"
             android:layout_width="189dp"
             android:layout_height="wrap_content"
-            android:text="CampaignStart"/>
+            android:text="@string/statistics_view"/>
 
     <LinearLayout
             android:id="@+id/otp_value"

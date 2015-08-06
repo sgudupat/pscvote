@@ -28,13 +28,13 @@ public class MyAdapter extends ArrayAdapter<Product> {
         View rowView = inflater.inflate(R.layout.list_item, parent, false);
         // 3. Get the two text view from the rowView
         TextView labelView = (TextView) rowView.findViewById(R.id.product_name);
-        //TextView valueView = (TextView) rowView.findViewById(R.id.product_value);
-        //TextView descView = (TextView) rowView.findViewById(R.id.product_description);
+        TextView valueView = (TextView) rowView.findViewById(R.id.product_value);
+        TextView descView = (TextView) rowView.findViewById(R.id.product_description);
         // 4. Set the text for textView
         labelView.setText(itemsArrayList.get(position).getPname());
-        //valueView.setText(itemsArrayList.get(position).getPvalue());
-        //descView.setText(itemsArrayList.get(position).getPdescription());
-        // 5. retrn rowView
+        valueView.setText(itemsArrayList.get(position).getPvalue());
+        descView.setText(itemsArrayList.get(position).getPdescription());
+        // 5. return rowView
         return rowView;
     }
 }
