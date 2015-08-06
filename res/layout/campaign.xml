@@ -1,56 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Campaign" />
 
     <TextView
-            android:id="@+id/textView1"
-            android:layout_width="242dp"
-            android:layout_height="51dp"
-            android:text="AnchorName"/>
+        android:id="@+id/textView3"
+        android:layout_width="192dp"
+        android:layout_height="40dp"
+        android:text="Respondents" />
 
     <TextView
-            android:id="@+id/client"
-            android:layout_width="234dp"
-            android:layout_height="48dp"
-            android:text="ClientName"/>
-
-
-    <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/pie"/>
-
-    <TextView
-            android:id="@+id/textView4"
-            android:layout_width="196dp"
-            android:layout_height="40dp"
-            android:text="Location"/>
-
-    <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/barchart"/>
+        android:id="@+id/textView4"
+        android:layout_width="196dp"
+        android:layout_height="40dp"
+        android:text="Location" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="167dp"
+            android:layout_height="wrap_content"
+            android:text="DONE" />
+
+        <Button
+            android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="BACK" />
 
-        <Button
-                android:id="@+id/button2"
-                android:layout_width="167dp"
-                android:layout_height="wrap_content"
-                android:text="DONE"/>
-
-        <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="BACK"/>
+      
 
     </LinearLayout>
 
