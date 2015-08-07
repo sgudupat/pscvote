@@ -119,8 +119,8 @@ public class AnchorActivity extends Activity {
     }
 
     public void onRadioSelected(View view) {
-        RadioGroup options = (RadioGroup) view.findViewById(R.id.campaign_options);
-        RadioButton option = (RadioButton) view.findViewById(options.getCheckedRadioButtonId());
+        RadioGroup options = (RadioGroup) findViewById(R.id.campaign_options);
+        RadioButton option = (RadioButton) findViewById(options.getCheckedRadioButtonId());
         String hint = (String) option.getHint();
         Toast.makeText(getApplicationContext(), "Value:" + hint, Toast.LENGTH_SHORT).show();
     }

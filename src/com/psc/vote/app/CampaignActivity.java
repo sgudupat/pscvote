@@ -58,14 +58,6 @@ public class CampaignActivity extends Activity {
             Log.i("Response 2:Error:", e.getMessage());
         }
         // Pie Chart Section Names
-	      /*  String[] code = new String[] {
-	            "Eclair & Older", "Froyo", "Gingerbread", "Honeycomb",
-	            "IceCream Sandwich", "Jelly Bean"
-	        };
-	 
-	        // Pie Chart Section Value
-	        double[] distribution = { 2.9, 19, 55.8, 1.9, 23.7, 1.8 } ;*/
-
         // Color of each Pie Chart Sections
         int[] colors = {Color.BLUE, Color.MAGENTA, Color.GREEN, Color.CYAN, Color.RED, Color.YELLOW};
 
