@@ -95,7 +95,7 @@ public class SignUpPageActivity extends Activity {
         LayoutInflater li = LayoutInflater.from(context);
         View promptsView = li.inflate(R.layout.prompts, null);
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        // set prompts.xml to alertdialog builder
+        // set prompts.xml to alert dialog builder
         alertDialogBuilder.setView(promptsView);
         final EditText userInput = (EditText) promptsView.findViewById(R.id.editTextDialogUserInput);
         // set dialog message
@@ -104,7 +104,7 @@ public class SignUpPageActivity extends Activity {
                     public void onClick(DialogInterface dialog, int id) {
                         // get user input and set it to result edit text
                         String aotp = userInput.getText().toString();
-                        Log.i("alert dailog otp", aotp);
+                        Log.i("alert dialog otp", aotp);
                         if (aotp.equals(otp)) {
                             try {
                                 //  Log.i("register", "try");
@@ -116,6 +116,8 @@ public class SignUpPageActivity extends Activity {
                                             Log.i("Response:", response);
                                             if (response.contains("success")) {
                                                 Intent intent = new Intent(context, SearchActivity.class);
+                                                EditText username = (EditText) findViewById(R.id.fld_username);
+                                                intent.putExtra("username", username.getText().toString());
                                                 startActivity(intent);
                                                 Log.i("inside otp if loop", "search activity started");
                                             }
@@ -129,8 +131,7 @@ public class SignUpPageActivity extends Activity {
                             }
                         }
                     }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

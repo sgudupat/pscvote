@@ -28,7 +28,6 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.search);
         Intent intent = getIntent();
         userName = intent.getStringExtra("username");
-        ////buildListView();
     }
 
     private void buildListView() {
@@ -88,12 +87,12 @@ public class SearchActivity extends Activity {
         buildListView();
     }
 
-
     public void trendingAnchors(View view) {
         EditText input = (EditText) findViewById(R.id.inputSearch);
         input.setText("");
         buildListView();
     }
+
     private String getAnchors() {
         EditText input = (EditText) findViewById(R.id.inputSearch);
         Log.i("triggerLogin:", "triggerLogin");
