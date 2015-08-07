@@ -20,7 +20,7 @@
         android:id="@+id/button1"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
-        android:text="Campaign" />
+        android:text="Campaign" android:onClick="goToCampaign"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -41,8 +41,6 @@
         android:layout_height="wrap_content"
         android:text="Locations" />
 
-  
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -52,7 +50,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="157dp"
             android:layout_height="wrap_content"
-            android:text="Done" />
+            android:text="Done" android:onClick="goToLandingPage"/>
 
         <Button
             android:id="@+id/button3"
@@ -60,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.68"
-            android:text="Back" />
+            android:text="Back" android:onClick="goToCampaign"/>
     </LinearLayout>
 
 </LinearLayout>

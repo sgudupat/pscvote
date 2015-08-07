@@ -20,6 +20,8 @@ public class AnchorActivity extends Activity {
 
     String username;
     String campaignId;
+    String anchorName;
+    String clientName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,23 +30,18 @@ public class AnchorActivity extends Activity {
         Log.i("SignInPageActivity", "inside user anchor page");
         // fetch value from key-value pair and make it visible on TextView.
         Intent intent = getIntent();
-        String anchorName = intent.getStringExtra("anchorName");
-        String clientName = intent.getStringExtra("clientName");
+        anchorName = intent.getStringExtra("anchorName");
+        clientName = intent.getStringExtra("clientName");
         campaignId = intent.getStringExtra("campaignId");
         username = intent.getStringExtra("username");
         Log.i("campaignId:", campaignId);
         String response = fetchCampaignInfo(campaignId);
         Log.i("inside displayCampaign", "displayCampaign");
         try {
-            Log.i("Data", "Before All");
             TextView anchor = (TextView) findViewById(R.id.campaignPage_AnchorName);
-            Log.i("Data", "Before Client");
             TextView client = (TextView) findViewById(R.id.campaignPage_ClientName);
-            Log.i("Data", "Before Question");
             TextView question = (TextView) findViewById(R.id.campaignPage_Question);
-            Log.i("Data", "Before JSON");
             JSONObject campaignJSON = new JSONObject(response);
-            Log.i("Campaign", campaignJSON.toString());
             anchor.setText(anchorName);
             client.setText(clientName);
             question.setText((String) campaignJSON.get("question"));
@@ -85,7 +82,10 @@ public class AnchorActivity extends Activity {
         submitVote(username, optionId);
         //Display Stats
         Intent intent = new Intent(this, CampaignActivity.class);
+        intent.putExtra("anchorName", anchorName);
+        intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 
@@ -122,12 +122,15 @@ public class AnchorActivity extends Activity {
         RadioGroup options = (RadioGroup) findViewById(R.id.campaign_options);
         RadioButton option = (RadioButton) findViewById(options.getCheckedRadioButtonId());
         String hint = (String) option.getHint();
-        Toast.makeText(getApplicationContext(), "Value:" + hint, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), "Value:" + hint, Toast.LENGTH_SHORT).show();
     }
 
     public void showStats(View view) {
         Intent intent = new Intent(this, CampaignActivity.class);
+        intent.putExtra("anchorName", anchorName);
+        intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
+        intent.putExtra("username", username);
         startActivity(intent);
     }
 }

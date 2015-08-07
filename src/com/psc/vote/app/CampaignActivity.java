@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import org.achartengine.ChartFactory;
 import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
@@ -23,24 +22,32 @@ import java.util.ArrayList;
 
 public class CampaignActivity extends Activity {
 
+    String anchorName;
+    String clientName;
+    String username;
+    String campaignId;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("SignInPageActivity", "inside user campaign page");
         setContentView(R.layout.campaign);
         Intent intent = getIntent();
-        String campaignId = intent.getStringExtra("campaignId");
+        anchorName = intent.getStringExtra("anchorName");
+        clientName = intent.getStringExtra("clientName");
+        username = intent.getStringExtra("username");
+        campaignId = intent.getStringExtra("campaignId");
         openChart(campaignId);
     }
 
     private void openChart(String campaignId) {
-    	GraphicalView mChartView;
+        GraphicalView mChartView;
         String response = "";
         ArrayList<String> ageRange = new ArrayList<String>();
         ArrayList<Integer> countValue = new ArrayList<Integer>();
         TextView anchor = (TextView) findViewById(R.id.textView1);
         TextView client = (TextView) findViewById(R.id.client);
-        
+
 
         int count = 0;
         Log.i("displayCampaign:", "displayCampaign");
@@ -51,10 +58,10 @@ public class CampaignActivity extends Activity {
             response = SimpleHttpClient.executeHttpPost("/displayStats", postParameters);
             Log.i("Response:", response);
             JSONObject jsonobject = new JSONObject(response);
-           String anchorn=  jsonobject.getString("anchor_id");
-           String clname=  jsonobject.getString("client_name");
-           anchor.setText(anchorn);
-           client.setText(clname);
+            String anchorn = jsonobject.getString("anchor_id");
+            String clname = jsonobject.getString("client_name");
+            anchor.setText(anchorn);
+            client.setText(clname);
             String Value = jsonobject.getString("values");
             JSONArray jsonArray2 = new JSONArray(Value);
             for (int j = 0; j < jsonArray2.length(); j++) {
@@ -97,12 +104,27 @@ public class CampaignActivity extends Activity {
         defaultRenderer.setChartTitleTextSize(10);
         defaultRenderer.setZoomButtonsVisible(false);
         LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
-       
-        
+
+
         // Creating an intent to plot bar chart using dataset and multipleRenderer
         mChartView = ChartFactory.getPieChartView(this, distributionSeries, defaultRenderer);
         layout.addView(mChartView);
         // Start Activity
-       // startActivity(intent);
+        // startActivity(intent);
+    }
+
+    public void goToCampaign(View view) {
+        Intent intent = new Intent(this, AnchorActivity.class);
+        intent.putExtra("anchorName", anchorName);
+        intent.putExtra("clientName", clientName);
+        intent.putExtra("campaignId", campaignId);
+        intent.putExtra("username", username);
+        startActivity(intent);
+    }
+
+    public void goToLandingPage(View view) {
+        Intent intent = new Intent(this, SearchActivity.class);
+        intent.putExtra("username", username);
+        startActivity(intent);
     }
 }
