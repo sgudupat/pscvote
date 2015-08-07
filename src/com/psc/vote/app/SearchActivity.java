@@ -84,11 +84,16 @@ public class SearchActivity extends Activity {
         return items;
     }
 
-
     public void searchResult(View view) {
         buildListView();
     }
 
+
+    public void trendingAnchors(View view) {
+        EditText input = (EditText) findViewById(R.id.inputSearch);
+        input.setText("");
+        buildListView();
+    }
     private String getAnchors() {
         EditText input = (EditText) findViewById(R.id.inputSearch);
         Log.i("triggerLogin:", "triggerLogin");

@@ -23,10 +23,12 @@ public class CampaignActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i("SignInPageActivity", "inside user campaign page");
         setContentView(R.layout.campaign);
-        openChart();
+        Intent intent = getIntent();
+        String campaignId = intent.getStringExtra("campaignId");
+        openChart(campaignId);
     }
 
-    private void openChart() {
+    private void openChart(String campaignId) {
         String response = "";
         ArrayList<String> ageRange = new ArrayList<String>();
         ArrayList<Integer> countValue = new ArrayList<Integer>();
@@ -34,7 +36,7 @@ public class CampaignActivity extends Activity {
         int count = 0;
         Log.i("displayCampaign:", "displayCampaign");
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-        postParameters.add(new BasicNameValuePair("campaignId", "loreal_camp1"));
+        postParameters.add(new BasicNameValuePair("campaignId", campaignId));
 
         try {
             response = SimpleHttpClient.executeHttpPost("/displayStats", postParameters);
@@ -62,7 +64,7 @@ public class CampaignActivity extends Activity {
         int[] colors = {Color.BLUE, Color.MAGENTA, Color.GREEN, Color.CYAN, Color.RED, Color.YELLOW};
 
         // Instantiating CategorySeries to plot Pie Chart
-        CategorySeries distributionSeries = new CategorySeries(" Android version distribution as on October 1, 2012");
+        CategorySeries distributionSeries = new CategorySeries("Campaign Statistics");
         for (Integer i = 0; i < countValue.size(); i++) {
             // Adding a slice with its values and name to the Pie Chart
             distributionSeries.add(ageRange.get(i), countValue.get(i));
@@ -78,11 +80,11 @@ public class CampaignActivity extends Activity {
             defaultRenderer.addSeriesRenderer(seriesRenderer);
         }
 
-        defaultRenderer.setChartTitle("Android version distribution as on October 1, 2012 ");
+        defaultRenderer.setChartTitle("Campaign Statistics");
         defaultRenderer.setChartTitleTextSize(20);
         defaultRenderer.setZoomButtonsVisible(true);
         // Creating an intent to plot bar chart using dataset and multipleRenderer
-        Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "AChartEnginePieChartDemo");
+        Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "Statistics");
         // Start Activity
         startActivity(intent);
     }

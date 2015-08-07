@@ -16,7 +16,6 @@
         <activity android:name=".SignInPageActivity" android:label="@string/log_in"></activity>
         <activity android:name=".SignUpPageActivity" android:label="@string/Registration"></activity>
         <activity android:name=".SearchActivity" android:label="@string/Search"></activity>
-        <activity android:name=".ShowActivity" android:label="@string/Showitem"></activity>
         <activity android:name=".CampaignActivity" android:label="@string/campaign"></activity>
         <activity android:name=".AnchorActivity" android:label="@string/anchor"></activity>
 		  <activity android:name="org.achartengine.GraphicalActivity" />

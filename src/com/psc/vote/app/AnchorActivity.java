@@ -127,6 +127,7 @@ public class AnchorActivity extends Activity {
 
     public void showStats(View view) {
         Intent intent = new Intent(this, CampaignActivity.class);
+        intent.putExtra("campaignId", campaignId);
         startActivity(intent);
     }
 }
