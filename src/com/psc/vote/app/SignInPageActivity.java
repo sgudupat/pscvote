@@ -22,7 +22,7 @@ public class SignInPageActivity extends Activity {
     }
 
     public void login(View view) {
-        EditText edit = (EditText) findViewById(R.id.emailAddress);
+        final EditText edit = (EditText) findViewById(R.id.emailAddress);
         EditText pwd = (EditText) findViewById(R.id.password);
         try {
             Log.i("triggerLogin:", "triggerLogin");
@@ -40,6 +40,7 @@ public class SignInPageActivity extends Activity {
                             Log.i("Response:", response);
                             if (response.contains("success")) {
                                 Intent intent = new Intent(context, SearchActivity.class);
+                                intent.putExtra("username", edit.getText().toString());
                                 startActivity(intent);
                                 Log.i("inside otp if loop", "search activity started");
                             }

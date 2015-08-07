@@ -19,12 +19,15 @@ import java.util.ArrayList;
 public class SearchActivity extends Activity {
 
     ArrayList<Product> items = new ArrayList<Product>();
+    String userName;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i("SearchActivity", "inside user sign in page");
         setContentView(R.layout.search);
+        Intent intent = getIntent();
+        userName = intent.getStringExtra("username");
         ////buildListView();
     }
 
@@ -39,11 +42,14 @@ public class SearchActivity extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView listText = (TextView) view.findViewById(R.id.campaign_id);
-                String text = listText.getText().toString();
+                TextView anchorName = (TextView) view.findViewById(R.id.anchor_name);
+                TextView clientName = (TextView) view.findViewById(R.id.client_name);
+                TextView campaignId = (TextView) view.findViewById(R.id.campaign_id);
                 Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
-                intent.putExtra("campaignid", text);
-                //intent.putExtra("selected-item", text);
+                intent.putExtra("username", userName);
+                intent.putExtra("anchorName", anchorName.getText().toString());
+                intent.putExtra("clientName", clientName.getText().toString());
+                intent.putExtra("campaignId", campaignId.getText().toString());
                 startActivity(intent);
             }
         });

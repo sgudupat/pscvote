@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-      <TextView
-        android:id="@+id/campaignPage_AnchorName"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:text="AnchorName" />
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
     <TextView
-        android:id="@+id/campaignPage_ClientName"
-        android:layout_width="231dp"
-        android:layout_height="45dp"
-        android:text="ClientName" />
+            android:id="@+id/campaignPage_AnchorName"
+            android:layout_width="227dp"
+            android:layout_height="51dp"
+            android:text="AnchorName"/>
+
+    <TextView
+            android:id="@+id/campaignPage_ClientName"
+            android:layout_width="231dp"
+            android:layout_height="45dp"
+            android:text="ClientName"/>
 
     <Button
-        android:id="@+id/campaign_stats_view"
-        android:layout_width="189dp"
-        android:layout_height="wrap_content"
-        android:text="Statistics" android:onClick="showStats"/>
-    <LinearLayout
-        android:id="@+id/otp_value"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-
-        <TextView
-            android:id="@+id/campaignPage_Question"
-            android:layout_width="262dp"
+            android:id="@+id/campaign_stats_view"
+            android:layout_width="189dp"
             android:layout_height="wrap_content"
-            android:hint="@string/que_tag" />
-    </LinearLayout>
-  <LinearLayout 
-      android:id="@+id/option"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/statistics"
+            android:text="Statistics" android:onClick="showStats"/>
+    <LinearLayout
+            android:id="@+id/otp_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Options" />
+            android:orientation="horizontal">
 
-<RadioGroup 
-    android:id="@+id/campaign_options"
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:checkedButton="@+id/sound">
-    
-  <RadioButton
-      android:id="@+id/campaign_opt1"
-      android:layout_width="238dp"
-      android:layout_height="wrap_content"
-      android:onClick="onRadioSelected"/>
-
-    <RadioButton
-            android:id="@+id/campaign_opt2"
-            android:layout_width="233dp"
+        <TextView
+                android:id="@+id/campaignPage_Question"
+                android:layout_width="262dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/que_tag"/>
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/option"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onRadioSelected"/>
+            android:orientation="horizontal">
 
-    <RadioButton
-            android:id="@+id/campaign_opt3"
-            android:layout_width="233dp"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioSelected"/>
+        <TextView
+                android:id="@+id/statistics"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Options"/>
 
-    <RadioButton
-      android:id="@+id/campaign_opt4"
-      android:layout_width="235dp"
-      android:layout_height="wrap_content"
-      android:onClick="onRadioSelected"/>
+        <RadioGroup
+                android:id="@+id/campaign_options"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:checkedButton="@+id/sound">
 
- </RadioGroup>
-  </LinearLayout>
-  <LinearLayout
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content" >
+            <RadioButton
+                    android:id="@+id/campaign_opt1"
+                    android:layout_width="238dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioSelected"/>
 
-      <Button
-          android:id="@+id/button1"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_weight="0.72"
-          android:text="Done"
-          android:onClick="showResult" />
-  </LinearLayout>
+            <RadioButton
+                    android:id="@+id/campaign_opt2"
+                    android:layout_width="233dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioSelected"/>
+
+            <RadioButton
+                    android:id="@+id/campaign_opt3"
+                    android:layout_width="233dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioSelected"/>
+
+            <RadioButton
+                    android:id="@+id/campaign_opt4"
+                    android:layout_width="235dp"
+                    android:layout_height="wrap_content"
+                    android:onClick="onRadioSelected"/>
+
+        </RadioGroup>
+    </LinearLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.72"
+                android:text="Done"
+                android:onClick="submitVote"/>
+    </LinearLayout>
 
 </LinearLayout>
