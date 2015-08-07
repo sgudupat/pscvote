@@ -30,7 +30,7 @@ public class AnchorActivity extends Activity {
         Intent intent = getIntent();
         String anchorName = intent.getStringExtra("anchorName");
         String clientName = intent.getStringExtra("clientName");
-        campaignId = intent.getStringExtra("campaignid");
+        campaignId = intent.getStringExtra("campaignId");
         username = intent.getStringExtra("username");
         Log.i("campaignId:", campaignId);
         String response = fetchCampaignInfo(campaignId);
