@@ -1,56 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
 
     <TextView
-            android:id="@+id/textView1"
-            android:layout_width="242dp"
-            android:layout_height="51dp"
-            android:text="AnchorName"/>
+        android:id="@+id/textView1"
+        android:layout_width="242dp"
+        android:layout_height="51dp"
+        android:text="AnchorName" />
 
     <TextView
-            android:id="@+id/client"
-            android:layout_width="234dp"
-            android:layout_height="48dp"
-            android:text="ClientName"/>
+        android:id="@+id/client"
+        android:layout_width="234dp"
+        android:layout_height="48dp"
+        android:text="ClientName" />
 
     <Button
-            android:id="@+id/button1"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:text="Campaign"/>
+        android:id="@+id/button1"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="Campaign" />
 
     <TextView
-            android:id="@+id/textView3"
-            android:layout_width="192dp"
-            android:layout_height="40dp"
-            android:text="Respondents"/>
-
-    <TextView
-            android:id="@+id/textView4"
-            android:layout_width="196dp"
-            android:layout_height="40dp"
-            android:text="Location"/>
+        android:id="@+id/textView3"
+        android:layout_width="101dp"
+        android:layout_height="wrap_content"
+        android:text="Respondents" />
 
     <LinearLayout
-            android:layout_width="match_parent"
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="222dp"
+        android:orientation="vertical" >
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="Locations" />
+
+  
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/button2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="157dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="Done" />
 
         <Button
-                android:id="@+id/button2"
-                android:layout_width="167dp"
-                android:layout_height="wrap_content"
-                android:text="DONE"/>
-
-        <Button
-                android:id="@+id/button3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="BACK"/>
-
+            android:id="@+id/button3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.68"
+            android:text="Back" />
     </LinearLayout>
 
 </LinearLayout>

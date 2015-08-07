@@ -5,7 +5,12 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import org.achartengine.ChartFactory;
+import org.achartengine.GraphicalView;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
@@ -29,9 +34,13 @@ public class CampaignActivity extends Activity {
     }
 
     private void openChart(String campaignId) {
+    	GraphicalView mChartView;
         String response = "";
         ArrayList<String> ageRange = new ArrayList<String>();
         ArrayList<Integer> countValue = new ArrayList<Integer>();
+        TextView anchor = (TextView) findViewById(R.id.textView1);
+        TextView client = (TextView) findViewById(R.id.client);
+        
 
         int count = 0;
         Log.i("displayCampaign:", "displayCampaign");
@@ -42,6 +51,10 @@ public class CampaignActivity extends Activity {
             response = SimpleHttpClient.executeHttpPost("/displayStats", postParameters);
             Log.i("Response:", response);
             JSONObject jsonobject = new JSONObject(response);
+           String anchorn=  jsonobject.getString("anchor_id");
+           String clname=  jsonobject.getString("client_name");
+           anchor.setText(anchorn);
+           client.setText(clname);
             String Value = jsonobject.getString("values");
             JSONArray jsonArray2 = new JSONArray(Value);
             for (int j = 0; j < jsonArray2.length(); j++) {
@@ -81,11 +94,15 @@ public class CampaignActivity extends Activity {
         }
 
         defaultRenderer.setChartTitle("Campaign Statistics");
-        defaultRenderer.setChartTitleTextSize(20);
-        defaultRenderer.setZoomButtonsVisible(true);
+        defaultRenderer.setChartTitleTextSize(10);
+        defaultRenderer.setZoomButtonsVisible(false);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+       
+        
         // Creating an intent to plot bar chart using dataset and multipleRenderer
-        Intent intent = ChartFactory.getPieChartIntent(getBaseContext(), distributionSeries, defaultRenderer, "Statistics");
+        mChartView = ChartFactory.getPieChartView(this, distributionSeries, defaultRenderer);
+        layout.addView(mChartView);
         // Start Activity
-        startActivity(intent);
+       // startActivity(intent);
     }
 }

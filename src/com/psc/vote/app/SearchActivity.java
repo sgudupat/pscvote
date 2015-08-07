@@ -58,6 +58,7 @@ public class SearchActivity extends Activity {
         try {
             //Populate from Server
             String anchors = getAnchors();
+            items.clear();
             //Build the list
             JSONArray jsonArray = new JSONArray(anchors);
             for (int i = 0; i < jsonArray.length(); i++) {
