@@ -1,40 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-  
-
-    <TextView
-        android:id="@+id/offer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="offer" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                tools:context=".RewardActivity"
+        >
 
     <TextView
-        android:id="@+id/offertext"
-        android:layout_width="227dp"
-        android:layout_height="51dp"
-        android:text="" />
+            android:id="@+id/offer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer" android:textStyle="bold" android:textSize="35px"/>
 
     <TextView
-        android:id="@+id/validity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Validity" />
+            android:id="@+id/offerText"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:text=""
+            android:layout_below="@+id/offer"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="38dp"/>
 
     <TextView
-        android:id="@+id/validitytext"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="dfdf" />
+            android:id="@+id/Validity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Validity"
+            android:layout_above="@+id/validityText"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="30dp" android:textSize="35px" android:textStyle="bold"/>
+
+    <TextView
+            android:id="@+id/validityText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="dfdf"
+            android:layout_above="@+id/reward_detail"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="97dp"/>
 
     <Button
-        android:id="@+id/end_profile"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DONE" />
+            android:id="@+id/reward_detail"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:layout_marginBottom="47dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+</RelativeLayout>

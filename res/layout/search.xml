@@ -7,19 +7,19 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal" android:weightSum="1">
-    <EditText
-            android:id="@+id/inputSearch"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:hint="Search products.."
-            android:inputType="textVisiblePassword" android:layout_weight="0.87"/>
+        <EditText
+                android:id="@+id/inputSearch"
+                android:layout_width="259dp"
+                android:layout_height="wrap_content"
+                android:hint="Search products.."
+                android:inputType="textVisiblePassword" android:layout_weight="0.87"/>
 
-    <Button
-            android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go"
-            android:onClick="searchResult"/>
+        <Button
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Go"
+                android:onClick="searchResult"/>
 
     </LinearLayout>
     <LinearLayout

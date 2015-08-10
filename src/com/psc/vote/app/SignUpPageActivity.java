@@ -135,10 +135,10 @@ public class SignUpPageActivity extends Activity {
                         }
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
         // create alert dialog
         AlertDialog alertDialog = alertDialogBuilder.create();
         // show it

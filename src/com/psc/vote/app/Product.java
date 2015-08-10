@@ -1,6 +1,5 @@
 package com.psc.vote.app;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 import java.util.Date;
@@ -77,9 +76,9 @@ public class Product {
         long endDate = campaignEndDate.getTime();
         long sysDate = new Date().getTime();
         long diffMilliSeconds = endDate - sysDate;
-        long minutes = diffMilliSeconds/(1000*60);
-        long hours = diffMilliSeconds/(1000*60*60);
-        long days = diffMilliSeconds/(1000*60*60*24);
+        long minutes = diffMilliSeconds / (1000 * 60);
+        long hours = diffMilliSeconds / (1000 * 60 * 60);
+        long days = diffMilliSeconds / (1000 * 60 * 60 * 24);
         if (days > 0) {
             return days + " day(s)";
         } else if (hours > 0) {
