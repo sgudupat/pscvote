@@ -28,6 +28,19 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.search);
         Intent intent = getIntent();
         userName = intent.getStringExtra("username");
+		 rewardButton = (ImageButton) findViewById(R.id.reward);
+       rewardButton.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+
+				 Intent intent = new Intent(view.getContext(), RewardActivity.class);
+			        startActivity(intent);
+
+
+			}
+
+		});
     }
 
     private void buildListView() {

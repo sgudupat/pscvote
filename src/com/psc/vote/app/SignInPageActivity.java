@@ -39,6 +39,10 @@ public class SignInPageActivity extends Activity {
                             String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
                             Log.i("Response:", response);
                             if (response.contains("success")) {
+							SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
+                            	SharedPreferences.Editor editor = prefs.edit();
+                            	editor.putString("loginname", edit.getText().toString());
+                            	editor.commit();
                                 Intent intent = new Intent(context, SearchActivity.class);
                                 intent.putExtra("username", edit.getText().toString());
                                 startActivity(intent);
