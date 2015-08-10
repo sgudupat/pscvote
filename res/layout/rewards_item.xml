@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
+
+    <!-- Rewards -->
+
+    <Space
+        android:id="@+id/space1"
+        android:layout_width="fill_parent"
+        android:layout_height="10px"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="56dp" />
+
+    <TextView
+        android:id="@+id/reward_name"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/space1"
+        android:padding="10sp"
+        android:text="LOREAL"
+        android:textSize="16dip"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/rewarrd_date"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/reward_name"
+        android:paddingLeft="5dp"
+        android:text="expires:09/09/15"
+        android:textSize="16dip" />
+
+    <TextView
+        android:id="@+id/reward_description"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/space1"
+        android:layout_marginTop="96dp"
+        android:paddingLeft="5dp"
+        android:text=" Use XYZ Code To Get 50% Discount  Offer For Online "
+        android:textSize="16dip" />
+
+</RelativeLayout>
