@@ -121,4 +121,12 @@ public class SearchActivity extends Activity {
             return "fail";
         }
     }
+
+    public void showProfile(View view) {
+
+    }
+
+    public void showRewardsSummary(View view) {
+
+    }
 }

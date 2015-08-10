@@ -15,28 +15,6 @@
             android:text="Vote : Profile"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-    <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView1"
-            android:layout_marginTop="14dp"
-            android:paddingLeft="26dp"
-            android:paddingRight="26dp"
-            android:text="Name"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
-
-    <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView2"
-            android:layout_alignBottom="@+id/textView2"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="19dp"
-            android:layout_toRightOf="@+id/textView2"
-            android:text="TextView"/>
     <LinearLayout android:id="@+id/parent_linear_layout"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -44,30 +22,47 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
             android:id="@+id/uname_block"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView2"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
             android:layout_marginTop="14dp"
-            android:orientation="horizontal">
+            android:weightSum="1">
 
         <TextView
-                android:id="@+id/name"
-                android:layout_width="84dp"
-                android:layout_height="wrap_content"
-                android:text="       Mobile"/>
-    </LinearLayout>
-
-    <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView3"
-            android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/uname_block"
-            android:text="TextView"/>
+                android:id="@+id/userName"
+                android:layout_width="80dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="14dp"
+                android:text="Name"
+                android:layout_alignParentStart="true"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/mobile"
+                android:layout_width="50dp"
+                android:layout_height="34dp"
+                android:text="Mobile"
+                android:layout_below="@+id/userName"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@+id/mobileText"
+                android:gravity="center"/>
+        <TextView
+                android:id="@+id/userNameText"
+                android:layout_width="fill_parent"
+                android:layout_height="34dp"
+                android:layout_marginLeft="19dp"
+                android:text="TextView"
+                android:layout_above="@+id/mobileText"
+                android:layout_toEndOf="@+id/userName" android:gravity="center"/>
+        <TextView
+                android:id="@+id/mobileText"
+                android:layout_width="fill_parent"
+                android:layout_height="34dp"
+                android:text="TextView"
+                android:layout_weight="1.07" android:layout_below="@+id/userName"
+                android:layout_toEndOf="@+id/userName" android:layout_alignStart="@+id/userNameText"
+                android:gravity="center"/>
+    </RelativeLayout>
 
     <LinearLayout
             android:id="@+id/age_block"
@@ -83,53 +78,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AgeGroup"/>
+        <Spinner android:id="@+id/spinner2" android:layout_width="fill_parent" android:layout_height="wrap_content"
+                 android:prompt="@string/age" android:layout_alignTop="@+id/age_block"
+                 android:layout_toEndOf="@+id/age_block"
+                 android:layout_alignStart="@+id/textView4" android:layout_above="@+id/gndr_block"/>
 
-        <RadioGroup
-                android:id="@+id/myRadioGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checkedButton="@+id/sound">
-
-            <RadioButton
-                    android:id="@+id/age1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="0-10 Years"/>
-
-            <RadioButton
-                    android:id="@+id/age2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="onRadioButtonClicked"
-                    android:text="10-20years"/>
-            <RadioButton android:id="@+id/age3"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="20-30 Years"/>
-            <RadioButton android:id="@+id/age4"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="30-40 Years"/>
-            <RadioButton android:id="@+id/age5"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="40-50 Years"/>
-            <RadioButton android:id="@+id/age6"
-                         android:layout_width="wrap_content"
-                         android:layout_height="wrap_content"
-                         android:onClick="onRadioButtonClicked"
-                         android:text="50-60 Years"/>
-        </RadioGroup>
-
-        <Space
-                android:layout_width="fill_parent"
-                android:layout_height="20px"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="56dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -137,8 +90,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/age_block"
-            android:layout_toLeftOf="@+id/textView4"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_toEndOf="@+id/parent_linear_layout" android:layout_marginTop="40dp">
         <TextView android:id="@+id/gender1"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
@@ -146,9 +99,9 @@
 
         <RadioGroup
                 android:id="@+id/myRadioGroup2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checkedButton="@+id/sound">
+                android:checkedButton="@+id/sound" android:orientation="horizontal" android:gravity="center">
 
             <RadioButton
                     android:id="@+id/gen1"
@@ -156,33 +109,34 @@
                     android:layout_height="wrap_content"
                     android:onClick="onRadioButtonClicked"
                     android:text="@string/he"/>
+            <RadioButton
+                    android:id="@+id/gen2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignRight="@+id/age_block"
+                    android:layout_alignTop="@+id/gndr_block"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/she"/>
+            <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="163dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/gen2"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/age_block"
+                    android:text="Others"/>
 
         </RadioGroup>
     </LinearLayout>
 
-    <RadioButton
-            android:id="@+id/gen2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/age_block"
-            android:layout_alignTop="@+id/gndr_block"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/she"/>
-
-    <RadioButton
-            android:id="@+id/radioButton1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/gen2"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/age_block"
-            android:text="Others"/>
     <LinearLayout
             android:id="@+id/push_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/gndr_block"
-            android:orientation="horizontal">
+            android:orientation="horizontal" android:layout_below="@+id/gndr_block"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/parent_linear_layout"
+            android:weightSum="1">
         <TextView
                 android:id="@+id/Push"
                 android:layout_width="wrap_content"
@@ -192,7 +146,8 @@
                 android:id="@+id/myradiogroup3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checkedButton="@+id/sound">
+                android:checkedButton="@+id/sound" android:orientation="horizontal" android:layout_weight="0.40"
+                android:gravity="center">
             <RadioButton
                     android:id="@+id/push1"
                     android:layout_width="wrap_content"
@@ -208,18 +163,12 @@
         </RadioGroup>
 
     </LinearLayout>
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-    </LinearLayout>
 
     <Button
             android:id="@+id/end_profile"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/textView4"
-            android:layout_alignParentBottom="true"
-            android:text="DONE"/>
+            android:text="DONE" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

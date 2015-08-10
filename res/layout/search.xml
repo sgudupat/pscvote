@@ -11,7 +11,7 @@
         android:id="@+id/user"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/user"/>
+        android:src="@drawable/user" android:clickable="true" android:onClick="showProfile"/>
 
                   <Space
                           android:layout_width="20px"
@@ -21,7 +21,7 @@
         android:id="@+id/reward"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@drawable/star"/>
+        android:src="@drawable/star" android:onClick="showRewardsSummary" android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
