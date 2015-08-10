@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -28,19 +29,14 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.search);
         Intent intent = getIntent();
         userName = intent.getStringExtra("username");
-		 rewardButton = (ImageButton) findViewById(R.id.reward);
-       rewardButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View view) {
-
-				 Intent intent = new Intent(view.getContext(), RewardActivity.class);
-			        startActivity(intent);
-
-
-			}
-
-		});
+        ImageButton rewardButton = (ImageButton) findViewById(R.id.reward);
+        rewardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), RewardActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void buildListView() {

@@ -3,7 +3,9 @@ package com.psc.vote.app;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -39,10 +41,10 @@ public class SignInPageActivity extends Activity {
                             String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
                             Log.i("Response:", response);
                             if (response.contains("success")) {
-							SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
-                            	SharedPreferences.Editor editor = prefs.edit();
-                            	editor.putString("loginname", edit.getText().toString());
-                            	editor.commit();
+                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
+                                SharedPreferences.Editor editor = prefs.edit();
+                                editor.putString("loginname", edit.getText().toString());
+                                editor.commit();
                                 Intent intent = new Intent(context, SearchActivity.class);
                                 intent.putExtra("username", edit.getText().toString());
                                 startActivity(intent);

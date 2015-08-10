@@ -36,5 +36,4 @@ public class RewardAdapter  extends ArrayAdapter<Reward> {
 	        // 5. return rowView
 	        return rowView;
 	    }
-
 }
