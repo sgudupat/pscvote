@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Vote : Profile"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="14dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView2"
+        android:layout_alignBottom="@+id/textView2"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="19dp"
+        android:layout_toRightOf="@+id/textView2"
+        android:text="TextView" />
+     <LinearLayout android:id="@+id/parent_linear_layout"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical">
+
+</LinearLayout>
+
+     <LinearLayout
+         android:id="@+id/uname_block"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_below="@+id/textView2"
+         android:layout_marginTop="14dp"
+         android:orientation="horizontal" >
+
+         <TextView
+             android:id="@+id/name"
+             android:layout_width="84dp"
+             android:layout_height="wrap_content"
+             android:text="       Mobile" />
+     </LinearLayout>
+
+     <TextView
+         android:id="@+id/textView4"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/textView3"
+         android:layout_alignParentRight="true"
+         android:layout_alignTop="@+id/uname_block"
+         android:text="TextView" />
+
+ <LinearLayout
+     android:id="@+id/age_block"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_alignParentLeft="true"
+     android:layout_below="@+id/uname_block"
+     android:layout_marginTop="32dp"
+     android:orientation="horizontal" >
+
+     <TextView
+         android:id="@+id/gender"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="AgeGroup" />
+
+     <RadioGroup
+         android:id="@+id/myRadioGroup"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:checkedButton="@+id/sound" >
+
+         <RadioButton
+             android:id="@+id/age1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="0-10 Years" />
+
+         <RadioButton
+             android:id="@+id/age2"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="10-20years" />
+         <RadioButton android:id="@+id/age3"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="20-30 Years"/>
+         <RadioButton android:id="@+id/age4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="30-40 Years"/>
+			 <RadioButton android:id="@+id/age5"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="40-50 Years"/>
+			 <RadioButton android:id="@+id/age6"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:onClick="onRadioButtonClicked"
+             android:text="50-60 Years"/>
+     </RadioGroup>
+
+     <Space
+         android:layout_width="fill_parent"
+         android:layout_height="20px"
+         android:layout_centerHorizontal="true"
+         android:layout_marginTop="56dp" />
+ </LinearLayout>
+
+  <LinearLayout
+      android:id="@+id/gndr_block"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/age_block"
+      android:layout_toLeftOf="@+id/textView4"
+      android:orientation="horizontal" >
+     <TextView android:id="@+id/gender1"
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text="Gender"/>
+      
+      <RadioGroup
+          android:id="@+id/myRadioGroup2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checkedButton="@+id/sound" >
+
+          <RadioButton
+              android:id="@+id/gen1"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:onClick="onRadioButtonClicked"
+              android:text="@string/he" />
+
+      </RadioGroup>
+  </LinearLayout>
+
+  <RadioButton
+      android:id="@+id/gen2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignRight="@+id/age_block"
+      android:layout_alignTop="@+id/gndr_block"
+      android:onClick="onRadioButtonClicked"
+      android:text="@string/she" />
+
+  <RadioButton
+      android:id="@+id/radioButton1"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignBottom="@+id/gen2"
+      android:layout_alignParentRight="true"
+      android:layout_below="@+id/age_block"
+      android:text="Others" />
+  <LinearLayout 
+      android:id="@+id/push_notification"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/gndr_block"
+      android:orientation="horizontal">
+      <TextView 
+          android:id="@+id/Push"
+           android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Push Notification"/>
+      <RadioGroup
+          android:id="@+id/myradiogroup3"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:checkedButton="@+id/sound" >
+          <RadioButton
+              android:id="@+id/push1"
+               android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:onClick="onRadioButtonClicked"
+              android:text="Yes" />
+          
+		     <RadioButton android:id="@+id/push2"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="No"
+                             android:onClick="onRadioButtonClicked"/>
+          </RadioGroup>
+              
+  </LinearLayout>
+  <LinearLayout 
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content">
+  </LinearLayout>
+
+  <Button
+      android:id="@+id/end_profile"
+      style="?android:attr/buttonStyleSmall"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@+id/textView4"
+      android:layout_alignParentBottom="true"
+      android:text="DONE" />
+ 
+</RelativeLayout>
