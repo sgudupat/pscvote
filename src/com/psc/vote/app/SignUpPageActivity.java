@@ -40,11 +40,15 @@ public class SignUpPageActivity extends Activity {
         boolean checked = ((RadioButton) view).isChecked();
         // Check which radio button was clicked
         switch (view.getId()) {
-            case R.id.radio_pirates:
+            case R.id.radio_he:
                 if (checked)
                     // Pirates are the best
                     break;
-            case R.id.radio_ninjas:
+            case R.id.radio_she:
+                if (checked)
+                    // Ninjas rule
+                    break;
+            case R.id.radio_others:
                 if (checked)
                     // Ninjas rule
                     break;
@@ -72,18 +76,17 @@ public class SignUpPageActivity extends Activity {
         postParameters.add(new BasicNameValuePair("age", ageValue));
         postParameters.add(new BasicNameValuePair("deviceId", deviceId));
         final Context context = this;
-        EditText mobilep = (EditText) findViewById(R.id.fld_mbl);
         String chars = "0123456789";
         final int PW_LENGTH = 5;
         Random rnd = new SecureRandom();
         StringBuilder pass = new StringBuilder();
-        for (int i = 0; i < PW_LENGTH; i++)
+        for (int i = 0; i < PW_LENGTH; i++) {
             pass.append(chars.charAt(rnd.nextInt(chars.length())));
-
+        }
         Log.i("otp password", pass.toString());
         final String otp = pass.toString();
         try {
-            String phoneNo = mobilep.toString();
+            String phoneNo = mobile.getText().toString();
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(phoneNo, null, otp, null, null);
             Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();

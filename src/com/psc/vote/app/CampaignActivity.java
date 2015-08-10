@@ -26,6 +26,7 @@ public class CampaignActivity extends Activity {
     String clientName;
     String username;
     String campaignId;
+    String readOnly;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class CampaignActivity extends Activity {
         clientName = intent.getStringExtra("clientName");
         username = intent.getStringExtra("username");
         campaignId = intent.getStringExtra("campaignId");
+        readOnly = intent.getStringExtra("readOnly");
         openChart(campaignId);
     }
 
@@ -47,7 +49,6 @@ public class CampaignActivity extends Activity {
         ArrayList<Integer> countValue = new ArrayList<Integer>();
         TextView anchor = (TextView) findViewById(R.id.textView1);
         TextView client = (TextView) findViewById(R.id.client);
-
 
         int count = 0;
         Log.i("displayCampaign:", "displayCampaign");
@@ -119,6 +120,7 @@ public class CampaignActivity extends Activity {
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
         intent.putExtra("username", username);
+        intent.putExtra("readOnly", readOnly);
         startActivity(intent);
     }
 

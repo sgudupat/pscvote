@@ -79,19 +79,24 @@
                       android:layout_height="wrap_content"
                       android:text="@string/lbl_gndr"/>
             <RadioGroup
-                    android:layout_width="wrap_content"
+                    android:layout_width="301dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/myRadioGroup"
                     android:checkedButton="@+id/sound">
-                <RadioButton android:id="@+id/radio_pirates"
+                <RadioButton android:id="@+id/radio_he"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:text="@string/he"
                              android:onClick="onRadioButtonClicked"/>
-                <RadioButton android:id="@+id/radio_ninjas"
+                <RadioButton android:id="@+id/radio_she"
                              android:layout_width="wrap_content"
                              android:layout_height="wrap_content"
                              android:text="@string/she"
+                             android:onClick="onRadioButtonClicked"/>
+                <RadioButton android:id="@+id/radio_others"
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:text="@string/others"
                              android:onClick="onRadioButtonClicked"/>
             </RadioGroup>
             <Space

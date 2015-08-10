@@ -8,20 +8,21 @@
             android:id="@+id/campaignPage_AnchorName"
             android:layout_width="match_parent"
             android:layout_height="51dp"
-            android:text="AnchorName"/>
+            android:text="AnchorName"
+            android:textAlignment="center" android:gravity="center"/>
 
     <TextView
             android:id="@+id/campaignPage_ClientName"
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:text="ClientName"/>
+            android:text="ClientName" android:textAlignment="center" android:gravity="center"/>
 
     <Button
             android:id="@+id/campaign_stats_view"
-            android:layout_width="189dp"
+            android:layout_width="193dp"
             android:layout_height="wrap_content"
             android:text="Statistics"
-            android:onClick="showStats"/>
+            android:onClick="showStats" android:layout_gravity="right"/>
     <Space
             android:layout_width="fill_parent"
             android:layout_height="10px"
@@ -96,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         <Button
-                android:id="@+id/button1"
+                android:id="@+id/doneButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.72"

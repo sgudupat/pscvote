@@ -3,12 +3,13 @@ package com.psc.vote.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -22,6 +23,7 @@ public class AnchorActivity extends Activity {
     String campaignId;
     String anchorName;
     String clientName;
+    String readOnly;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class AnchorActivity extends Activity {
         clientName = intent.getStringExtra("clientName");
         campaignId = intent.getStringExtra("campaignId");
         username = intent.getStringExtra("username");
+        readOnly = intent.getStringExtra("readOnly");
         Log.i("campaignId:", campaignId);
         String response = fetchCampaignInfo(campaignId);
         Log.i("inside displayCampaign", "displayCampaign");
@@ -68,6 +71,11 @@ public class AnchorActivity extends Activity {
                     option4.setHint((String) option.get("option_id"));
                 }
             }
+            //If Read Only then Done button will not be displayed
+            if (!TextUtils.isEmpty(readOnly) && TextUtils.equals(readOnly, "Y")) {
+                Button doneButton = (Button) findViewById(R.id.doneButton);
+                doneButton.setVisibility(View.INVISIBLE);
+            }
         } catch (Exception e) {
         }
     }
@@ -86,6 +94,7 @@ public class AnchorActivity extends Activity {
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
         intent.putExtra("username", username);
+        intent.putExtra("readOnly", "N");
         startActivity(intent);
     }
 
@@ -131,6 +140,7 @@ public class AnchorActivity extends Activity {
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
         intent.putExtra("username", username);
+        intent.putExtra("readOnly", readOnly);
         startActivity(intent);
     }
 }

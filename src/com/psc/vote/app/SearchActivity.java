@@ -8,12 +8,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class SearchActivity extends Activity {
@@ -32,23 +32,21 @@ public class SearchActivity extends Activity {
 
     private void buildListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
-        // Adding items to listview
+        // Adding items to list view
         // 1. pass context and data to the custom adapter
-        Log.i("inside buildlist", "listbuitl");
-        MyAdapter adapter = new MyAdapter(SearchActivity.this, generateData());
+        Log.i("inside build list", "list built");
+        final MyAdapter adapter = new MyAdapter(SearchActivity.this, generateData());
         //2. setListAdapter
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TextView anchorName = (TextView) view.findViewById(R.id.anchor_name);
-                TextView clientName = (TextView) view.findViewById(R.id.client_name);
-                TextView campaignId = (TextView) view.findViewById(R.id.campaign_id);
                 Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
                 intent.putExtra("username", userName);
-                intent.putExtra("anchorName", anchorName.getText().toString());
-                intent.putExtra("clientName", clientName.getText().toString());
-                intent.putExtra("campaignId", campaignId.getText().toString());
+                intent.putExtra("anchorName", adapter.getItem(position).getAnchorName());
+                intent.putExtra("clientName", adapter.getItem(position).getClientName());
+                intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());
+                intent.putExtra("readOnly", adapter.getItem(position).isCampaignExpired());
                 startActivity(intent);
             }
         });
@@ -76,7 +74,11 @@ public class SearchActivity extends Activity {
                     Log.i("client id", "json object built");
                     String cid = jsonobject2.getString("campaign_id");
                     Log.i("client id", cid);
-                    items.add(new Product(aname, client, cid));
+                    String endDate = jsonobject2.getString("end_date");  //2015-08-04
+                    Log.i("End date", endDate);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Log.i("dateFormat", "Object");
+                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate)));
                 }
             }
         } catch (Exception e) {

@@ -6,19 +6,19 @@
 
     <TextView
         android:id="@+id/textView1"
-        android:layout_width="242dp"
+        android:layout_width="match_parent"
         android:layout_height="51dp"
-        android:text="AnchorName" />
+        android:text="AnchorName" android:textAlignment="center" android:gravity="center"/>
 
     <TextView
         android:id="@+id/client"
-        android:layout_width="234dp"
+        android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="ClientName" />
+        android:text="ClientName" android:textAlignment="center" android:gravity="center"/>
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="280dp"
+        android:layout_width="189dp"
         android:layout_height="wrap_content"
         android:text="Campaign" android:onClick="goToCampaign"/>
 

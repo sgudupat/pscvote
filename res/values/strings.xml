@@ -15,6 +15,7 @@
     <string name="lbl_enter_mbl">Enter Mobile Number</string>
     <string name="he">He</string>
     <string name="she">She</string>
+    <string name="others">Others</string>
     <string name="lbl_gndr">Gender:</string>
     <string name="lbl_age">Age Group:</string>
     <string name="age">age</string>

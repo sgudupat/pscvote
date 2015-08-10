@@ -33,7 +33,7 @@ public class MyAdapter extends ArrayAdapter<Product> {
         // 4. Set the text for textView
         labelView.setText(itemsArrayList.get(position).getAnchorName());
         valueView.setText(itemsArrayList.get(position).getClientName());
-        descView.setText(itemsArrayList.get(position).getCampaignId());
+        descView.setText(itemsArrayList.get(position).getCampaignStatusDescription());
         // 5. return rowView
         return rowView;
     }
