@@ -31,4 +31,6 @@
     <string name="campaign">campaign</string>
     <string name="statistics_view">Statistics</string>
     <string name="anchor">Anchor</string>
+	  <string name="reward">Reward By anchor</string>
+	    <string name="detail">Anchor  and Client  details</string>
 </resources>
