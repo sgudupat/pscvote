@@ -8,7 +8,7 @@
         android:layout_height="wrap_content" android:gravity="right">
 
          <ImageButton
-        android:id="@+id/user"
+        android:id="@+id/profileImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/user" android:clickable="true" android:onClick="showProfile"/>

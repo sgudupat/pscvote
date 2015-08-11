@@ -18,8 +18,9 @@
         <activity android:name=".SearchActivity" android:label="@string/Search"></activity>
         <activity android:name=".CampaignActivity" android:label="@string/campaign"></activity>
         <activity android:name=".AnchorActivity" android:label="@string/anchor"></activity>
-		   <activity android:name=".RewardActivity" android:label="@string/reward"></activity>
-             <activity android:name=".ClientDetailActivity" android:label="@string/detail"></activity>
-		  <activity android:name="org.achartengine.GraphicalActivity" />
+        <activity android:name=".RewardActivity" android:label="@string/reward"></activity>
+        <activity android:name=".ClientDetailActivity" android:label="@string/detail"></activity>
+        <activity android:name=".UserProfileActivity" android:label="@string/myProfile"></activity>
+        <activity android:name="org.achartengine.GraphicalActivity"/>
     </application>
 </manifest>

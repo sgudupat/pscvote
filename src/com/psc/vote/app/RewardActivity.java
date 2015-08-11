@@ -30,7 +30,7 @@ public class RewardActivity extends Activity {
 
     private String rewardDetails() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        String sname = preferences.getString("loginname", "");
+        String sname = preferences.getString("username", "");
         Log.i("session name", sname);
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("username", sname));

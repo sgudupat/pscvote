@@ -2,7 +2,9 @@ package com.psc.vote.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,13 +29,23 @@ public class SearchActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i("SearchActivity", "inside user sign in page");
         setContentView(R.layout.search);
-        Intent intent = getIntent();
-        userName = intent.getStringExtra("username");
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        userName = preferences.getString("username", "");
+        Log.i("userName::" , userName);
         ImageButton rewardButton = (ImageButton) findViewById(R.id.reward);
         rewardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), RewardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        ImageButton profileButton = (ImageButton) findViewById(R.id.profileImage);
+        profileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), UserProfileActivity.class);
                 startActivity(intent);
             }
         });

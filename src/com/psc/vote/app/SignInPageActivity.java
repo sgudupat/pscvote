@@ -39,16 +39,15 @@ public class SignInPageActivity extends Activity {
                 String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
                 Log.i("Response:", response);
                 JSONObject jsonobject = new JSONObject(response);
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("loginname", edit.getText().toString());
+                editor.putString("username", (String) jsonobject.get("user_name"));
+                editor.putString("pushNotification", (String) jsonobject.get("push_notification"));
+                editor.putString("age", (String) jsonobject.get("age"));
+                editor.putString("gender", (String) jsonobject.get("gender"));
+                editor.putString("mobile", (String) jsonobject.get("mobile"));
                 editor.commit();
                 Intent intent = new Intent(context, SearchActivity.class);
-                intent.putExtra("username", (String) jsonobject.get("user_name"));
-                intent.putExtra("pushNotification", (String) jsonobject.get("push_notification"));
-                intent.putExtra("age", (String) jsonobject.get("age"));
-                intent.putExtra("gender", (String) jsonobject.get("gender"));
-                intent.putExtra("mobile", (String) jsonobject.get("mobile"));
                 startActivity(intent);
                 Log.i("inside otp if loop", "search activity started");
             } catch (Exception e) {
