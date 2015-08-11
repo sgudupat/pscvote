@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
@@ -110,27 +111,20 @@ public class SignUpPageActivity extends Activity {
                         Log.i("alert dialog otp", aotp);
                         if (aotp.equals(otp)) {
                             try {
-                                //  Log.i("register", "try");
-                                new Thread(new Runnable() {
-                                    public void run() {
-                                        // Log.i("Response 2:", "In New Thread");
-                                        try {
-                                            String response = SimpleHttpClient.executeHttpPost("/register", postParameters);
-                                            Log.i("Response:", response);
-                                            if (response.contains("success")) {
-                                                Intent intent = new Intent(context, SearchActivity.class);
-                                                EditText username = (EditText) findViewById(R.id.fld_username);
-                                                intent.putExtra("username", username.getText().toString());
-                                                startActivity(intent);
-                                                Log.i("inside otp if loop", "search activity started");
-                                            }
-                                        } catch (Exception e) {
-                                            Log.i("Response 2:Error:", e.getMessage());
-                                        }
-                                    }
-                                }).start();
+                                String response = SimpleHttpClient.executeHttpPost("/register", postParameters);
+                                Log.i("Response:", response);
+                                JSONObject jsonobject = new JSONObject(response);
+                                Intent intent = new Intent(context, SearchActivity.class);
+                                intent.putExtra("username", (String) jsonobject.get("user_name"));
+                                intent.putExtra("pushNotification", (String) jsonobject.get("push_notification"));
+                                intent.putExtra("age", (String) jsonobject.get("age"));
+                                intent.putExtra("gender", (String) jsonobject.get("gender"));
+                                intent.putExtra("mobile", (String) jsonobject.get("mobile"));
+                                startActivity(intent);
+                                Log.i("inside otp if loop", "search activity started");
                             } catch (Exception e) {
                                 Log.e("register", e.getMessage() + "");
+                                Toast.makeText(getApplicationContext(), "Login Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
                             }
                         }
                     }

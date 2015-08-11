@@ -9,8 +9,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -34,29 +36,24 @@ public class SignInPageActivity extends Activity {
             final Context context = this;
             try {
                 Log.i("LoginPageActivity", "try");
-                new Thread(new Runnable() {
-                    public void run() {
-                        Log.i("Response 2:", "In New Thread");
-                        try {
-                            String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
-                            Log.i("Response:", response);
-                            if (response.contains("success")) {
-                                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
-                                SharedPreferences.Editor editor = prefs.edit();
-                                editor.putString("loginname", edit.getText().toString());
-                                editor.commit();
-                                Intent intent = new Intent(context, SearchActivity.class);
-                                intent.putExtra("username", edit.getText().toString());
-                                startActivity(intent);
-                                Log.i("inside otp if loop", "search activity started");
-                            }
-                        } catch (Exception e) {
-                            Log.i("Response 2:Error:", e.getMessage());
-                        }
-                    }
-                }).start();
+                String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
+                Log.i("Response:", response);
+                JSONObject jsonobject = new JSONObject(response);
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context); // 0 - for private mode
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("loginname", edit.getText().toString());
+                editor.commit();
+                Intent intent = new Intent(context, SearchActivity.class);
+                intent.putExtra("username", (String) jsonobject.get("user_name"));
+                intent.putExtra("pushNotification", (String) jsonobject.get("push_notification"));
+                intent.putExtra("age", (String) jsonobject.get("age"));
+                intent.putExtra("gender", (String) jsonobject.get("gender"));
+                intent.putExtra("mobile", (String) jsonobject.get("mobile"));
+                startActivity(intent);
+                Log.i("inside otp if loop", "search activity started");
             } catch (Exception e) {
                 Log.e("LoginPageActivity", e.getMessage() + "");
+                Toast.makeText(getApplicationContext(), "Login Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
             }
             Log.i("After process:", "Done");
         } catch (Exception e) {
