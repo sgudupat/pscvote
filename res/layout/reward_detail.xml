@@ -1,54 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:orientation="vertical"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                tools:context=".RewardActivity"
-        >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+  
 
     <TextView
-            android:id="@+id/offer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Offer" android:textStyle="bold" android:textSize="35px"/>
+        android:id="@+id/offer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="offer" />
 
     <TextView
-            android:id="@+id/offerText"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:text=""
-            android:layout_below="@+id/offer"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="38dp"/>
+        android:id="@+id/offertext"
+        android:layout_width="227dp"
+        android:layout_height="51dp"
+        android:text="" />
 
     <TextView
-            android:id="@+id/Validity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Validity"
-            android:layout_above="@+id/validityText"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="30dp" android:textSize="35px" android:textStyle="bold"/>
+        android:id="@+id/validity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Validity" />
 
     <TextView
-            android:id="@+id/validityText"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="dfdf"
-            android:layout_above="@+id/reward_detail"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="97dp"/>
+        android:id="@+id/validitytext"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="dfdf" />
 
     <Button
-            android:id="@+id/reward_detail"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="DONE"
-			 android:onClick="showReward"
-            android:layout_marginBottom="47dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+        android:id="@+id/end_profile"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONE"
+        android:onClick="showReward" />
 
-</RelativeLayout>
+</LinearLayout>
