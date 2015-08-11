@@ -34,4 +34,5 @@
     <string name="reward">Reward By anchor</string>
     <string name="detail">Anchor and Client details</string>
     <string name="myProfile">My Profile</string>
+	  <string name="rewarddetail">RewardDeatil</string>
 </resources>
