@@ -31,7 +31,7 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.search);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         userName = preferences.getString("username", "");
-        Log.i("userName::" , userName);
+        Log.i("userName::", userName);
         ImageButton rewardButton = (ImageButton) findViewById(R.id.reward);
         rewardButton.setOnClickListener(new View.OnClickListener() {
             @Override

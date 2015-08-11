@@ -3,25 +3,25 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical">
-			  <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:gravity="right">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:gravity="right">
 
-         <ImageButton
-        android:id="@+id/profileImage"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/user" android:clickable="true" android:onClick="showProfile"/>
+        <ImageButton
+                android:id="@+id/profileImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/user" android:clickable="true" android:onClick="showProfile"/>
 
-                  <Space
-                          android:layout_width="20px"
-                          android:layout_height="20px"
-                          />
-                  <ImageButton
-        android:id="@+id/reward"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/star" android:onClick="showRewardsSummary" android:clickable="true"/>
+        <Space
+                android:layout_width="20px"
+                android:layout_height="20px"
+                />
+        <ImageButton
+                android:id="@+id/reward"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/star" android:onClick="showRewardsSummary" android:clickable="true"/>
     </LinearLayout>
 
     <LinearLayout android:layout_width="match_parent"
