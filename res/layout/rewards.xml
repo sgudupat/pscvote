@@ -8,8 +8,8 @@
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="VOTE : REWARDS"
-            android:textAppearance="?android:attr/textAppearanceLarge"/>
+            android:text="Rewards"
+            android:textAppearance="?android:attr/textAppearanceLarge" android:gravity="center"/>
     <Space
             android:layout_width="fill_parent"
             android:layout_height="10px"
