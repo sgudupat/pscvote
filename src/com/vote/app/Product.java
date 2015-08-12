@@ -1,4 +1,4 @@
-package com.psc.vote.app;
+package com.vote.app;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package com.psc.vote.app;
+package com.vote.app;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,27 +68,62 @@ public class UserProfileActivity extends Activity {
 
     private void submitChanges() {
         TextView usernameField = (TextView) findViewById(R.id.userNameText);
-        TextView mobileField = (TextView) findViewById(R.id.mobileText);
         RadioGroup gen = (RadioGroup) findViewById(R.id.myRadioGroup2);
-        RadioButton genderButton = (RadioButton) findViewById(gen.getCheckedRadioButtonId());
-        String genderValue = (String) genderButton.getText();
+        RadioButton profileGender = (RadioButton) findViewById(gen.getCheckedRadioButtonId());
+        String genderValue = (String) profileGender.getText();
         RadioGroup push = (RadioGroup) findViewById(R.id.myradiogroup3);
-        RadioButton pushButton = (RadioButton) findViewById(gen.getCheckedRadioButtonId());
+        RadioButton pushButton = (RadioButton) findViewById(push.getCheckedRadioButtonId());
         String pushValue = (String) pushButton.getText();
+        Spinner age = (Spinner) findViewById(R.id.profile_age);
+        String ageValue = age.getSelectedItem().toString();
         Log.i("username", usernameField.getText().toString());
-        Log.i("mobile", mobileField.getText().toString());
         Log.i("gender", genderValue);
-        Log.i("pushnotification", pushValue);
+        Log.i("pushNotification", pushValue);
+        Log.i("age", ageValue);
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("username", usernameField.getText().toString()));
         postParameters.add(new BasicNameValuePair("gender", genderValue));
-        postParameters.add(new BasicNameValuePair("age", "20_30"));
+        postParameters.add(new BasicNameValuePair("age", ageValue));
         postParameters.add(new BasicNameValuePair("pushNotification", pushValue));
         try {
             String response = SimpleHttpClient.executeHttpPost("/updateUser", postParameters);
             Log.i("Response:", response);
+            if (response.contains("success")) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("pushNotification", pushValue);
+                editor.putString("age", ageValue);
+                editor.putString("gender", genderValue);
+                editor.apply();
+            } else {
+                Toast.makeText(getApplicationContext(), "Update Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
+            }
         } catch (Exception e) {
             Log.i("Response 2:Error:", e.getMessage());
+            Toast.makeText(getApplicationContext(), "Update Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+        // Check which radio button was clicked
+        switch (view.getId()) {
+            case R.id.gen1:
+                if (checked)
+                    break;
+            case R.id.gen2:
+                if (checked)
+                    break;
+            case R.id.gen3:
+                if (checked)
+                    break;
+            case R.id.push1:
+                if (checked)
+                    break;
+            case R.id.push2:
+                if (checked)
+                    break;
         }
     }
 }
