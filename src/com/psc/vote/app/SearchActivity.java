@@ -91,14 +91,14 @@ public class SearchActivity extends Activity {
                 for (int j = 0; j < jsonArray2.length(); j++) {
                     Log.i("client id", "inside campaign");
                     JSONObject jsonobject2 = jsonArray2.getJSONObject(j);
-                    Log.i("client id", "json object built");
                     String cid = jsonobject2.getString("campaign_id");
-                    Log.i("client id", cid);
                     String endDate = jsonobject2.getString("end_date");  //2015-08-04
-                    Log.i("End date", endDate);
+                    String anchorCreationDate = jsonobject2.getString("creation_date");  //2015-08-04
+                    String websiteURL = jsonobject2.getString("website_url");
+                    String clientInfo = jsonobject2.getString("client_info");
+
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    Log.i("dateFormat", "Object");
-                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate)));
+                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
                 }
             }
         } catch (Exception e) {

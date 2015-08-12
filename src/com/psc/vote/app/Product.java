@@ -12,12 +12,21 @@ public class Product {
     private String campaignStatusDescription;
     private Date campaignEndDate;
 
-    public Product(String anchorName, String clientName, String campaignId, Date endDate) {
+    //Variables that hold the information for sending to Anchor and Client detail page
+    private Date anchorCreationDate;
+    private String clientWebsiteAddress;
+    private String clientInfo;
+
+    public Product(String anchorName, String clientName, String campaignId, Date endDate, Date creationDate, String websiteURL, String clientInfo) {
         super();
         this.anchorName = anchorName;
         this.clientName = clientName;
         this.campaignId = campaignId;
         this.campaignEndDate = endDate;
+
+        this.anchorCreationDate = creationDate;
+        this.clientWebsiteAddress = websiteURL;
+        this.clientInfo = clientInfo;
     }
 
     public String getAnchorName() {
@@ -90,6 +99,30 @@ public class Product {
         }
     }
 
+    public Date getAnchorCreationDate() {
+        return anchorCreationDate;
+    }
+
+    public void setAnchorCreationDate(Date anchorCreationDate) {
+        this.anchorCreationDate = anchorCreationDate;
+    }
+
+    public String getClientWebsiteAddress() {
+        return clientWebsiteAddress;
+    }
+
+    public void setClientWebsiteAddress(String clientWebsiteAddress) {
+        this.clientWebsiteAddress = clientWebsiteAddress;
+    }
+
+    public String getClientInfo() {
+        return clientInfo;
+    }
+
+    public void setClientInfo(String clientInfo) {
+        this.clientInfo = clientInfo;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -97,6 +130,10 @@ public class Product {
                 ", clientName='" + clientName + '\'' +
                 ", campaignId='" + campaignId + '\'' +
                 ", campaignStatusDescription='" + campaignStatusDescription + '\'' +
+                ", campaignEndDate=" + campaignEndDate +
+                ", anchorCreationDate=" + anchorCreationDate +
+                ", clientWebsiteAddress='" + clientWebsiteAddress + '\'' +
+                ", clientInfo='" + clientInfo + '\'' +
                 '}';
     }
 }
