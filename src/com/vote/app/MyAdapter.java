@@ -4,15 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MyAdapter extends ArrayAdapter<Product> {
 
@@ -39,7 +39,12 @@ public class MyAdapter extends ArrayAdapter<Product> {
         valueView = (TextView) rowView.findViewById(R.id.client_name);
         descView = (TextView) rowView.findViewById(R.id.campaign_id);
 
-        labelView.setOnClickListener(onClickListener);
+        labelView.setOnClickListener(new AnchorListener(
+                itemsArrayList.get(position).getAnchorName()
+                , itemsArrayList.get(position).getClientName()
+                , itemsArrayList.get(position).getAnchorCreationDate()
+                , itemsArrayList.get(position).getClientWebsiteAddress()
+                , itemsArrayList.get(position).getClientInfo()));
         SpannableString content = new SpannableString(itemsArrayList.get(position).getAnchorName());
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
         labelView.setText(content);
@@ -50,21 +55,31 @@ public class MyAdapter extends ArrayAdapter<Product> {
         return rowView;
     }
 
-    private OnClickListener onClickListener = new OnClickListener() {
+    public class AnchorListener implements View.OnClickListener {
+        private String anchorName;
+        private String clientName;
+        private Date anchorCreationDate;
+        private String websiteURL;
+        private String clientInfo;
+
+        public AnchorListener(String anchorName, String clientName, Date anchorCreationDate, String websiteURL, String clientInfo) {
+            this.anchorName = anchorName;
+            this.clientName = clientName;
+            this.anchorCreationDate = anchorCreationDate;
+            this.websiteURL = websiteURL;
+            this.clientInfo = clientInfo;
+        }
+
         @Override
         public void onClick(View v) {
-            Log.i("search row click", " you clicked me");
-            Log.i("anchor name", labelView.getText().toString());
-            Log.i("client name", valueView.getText().toString());
-            Log.i("campaign description", descView.getText().toString());
             Intent intent = new Intent(context, ClientDetailActivity.class);
-            //TODO: Need all these to pass as params
-            //intent.putExtra("anchorName", itemsArrayList.get().getAnchorName());
-            //intent.putExtra("clientName", itemsArrayList.get(position).getClientName());
-            //intent.putExtra("anchorCreationDate", itemsArrayList.get(position).getAnchorCreationDate());
-            //intent.putExtra("websiteURL", itemsArrayList.get(position).getClientWebsiteAddress());
-            //intent.putExtra("clientInfo", itemsArrayList.get(position).getClientInfo());
+            intent.putExtra("anchorName", anchorName);
+            intent.putExtra("clientName", clientName);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            intent.putExtra("anchorCreationDate", dateFormat.format(anchorCreationDate));
+            intent.putExtra("websiteURL", websiteURL);
+            intent.putExtra("clientInfo", clientInfo);
             context.startActivity(intent);
         }
-    };
+    }
 }

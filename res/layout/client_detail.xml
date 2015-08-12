@@ -11,14 +11,19 @@
             android:layout_width="fill_parent"
             android:layout_height="100dp"
             android:text=""
-            android:layout_alignParentEnd="true"/>
+            android:layout_marginTop="58dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
     <TextView
             android:id="@+id/clientWebsite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Client Website"
-            android:layout_marginTop="67dp" android:layout_below="@+id/anchorDescription"
-            android:layout_alignParentStart="true" android:textStyle="bold" android:textSize="35px"/>
+            android:layout_marginTop="9dp"
+            android:layout_below="@+id/anchorDescription"
+            android:layout_alignParentStart="true"
+            android:textStyle="bold"
+            android:textSize="35px"/>
     <TextView
             android:id="@+id/websitetext"
             android:layout_width="fill_parent"
@@ -49,8 +54,10 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:text="DONE"
-            android:layout_marginBottom="45dp" android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"/>
+            android:text="Done"
+            android:layout_marginBottom="45dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:onClick="goToSearchPage"/>
 
 </RelativeLayout>
