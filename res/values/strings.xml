@@ -34,10 +34,11 @@
     <string name="reward">Reward By anchor</string>
     <string name="detail">Anchor and Client details</string>
     <string name="myProfile">My Profile</string>
-    <string name="rewarddetail">RewardDeatil</string>
-    <string name="forgot"><u>forgot password</u></string>
-    <string name="otp">Enter The OTP</string>
-    <string name="otpButton">OTP</string>
+    <string name="rewarddetail">RewardDetail</string>
+    <string name="forgot"><u>Forgot Password</u></string>
+    <string name="otp">Enter OTP</string>
+    <string name="otpButton">Request OTP</string>
     <string name="forgotp">ForgotPassword</string>
-    <string name="subButton">submit</string>
+    <string name="subButton">Submit</string>
+    <string name="forgotPasswordHeading">Forgot Password</string>
 </resources>

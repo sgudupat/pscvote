@@ -22,6 +22,7 @@
         <activity android:name=".ClientDetailActivity" android:label="@string/detail"></activity>
         <activity android:name=".UserProfileActivity" android:label="@string/myProfile"></activity>
         <activity android:name=".RewardDetailActivity" android:label="@string/rewarddetail"></activity>
+        <activity android:name=".ForgotPasswordActivity" android:label="@string/forgotPasswordHeading"></activity>
         <activity android:name="org.achartengine.GraphicalActivity"/>
     </application>
 </manifest>
