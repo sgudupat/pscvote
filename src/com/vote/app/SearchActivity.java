@@ -83,9 +83,12 @@ public class SearchActivity extends Activity {
                 JSONObject jsonobject = jsonArray.getJSONObject(i);
                 String aname = jsonobject.getString("anchor_name");
                 String client = jsonobject.getString("client_name");
-                String cname = jsonobject.getString("campaigns");
+                String anchorCreationDate = jsonobject.getString("creation_date");  //2015-08-04
+                String websiteURL = jsonobject.getString("website_url");
+                String clientInfo = jsonobject.getString("client_info");
                 Log.i("anchor name", aname);
                 Log.i("client name", client);
+                String cname = jsonobject.getString("campaigns");
                 Log.i("campaign name", cname);
                 JSONArray jsonArray2 = new JSONArray(cname);
                 for (int j = 0; j < jsonArray2.length(); j++) {
@@ -93,10 +96,6 @@ public class SearchActivity extends Activity {
                     JSONObject jsonobject2 = jsonArray2.getJSONObject(j);
                     String cid = jsonobject2.getString("campaign_id");
                     String endDate = jsonobject2.getString("end_date");  //2015-08-04
-                    String anchorCreationDate = jsonobject2.getString("creation_date");  //2015-08-04
-                    String websiteURL = jsonobject2.getString("website_url");
-                    String clientInfo = jsonobject2.getString("client_info");
-
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     items.add(new Product(aname, client, cid, dateFormat.parse(endDate), dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
                 }
