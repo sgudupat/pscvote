@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -91,9 +92,9 @@ public class UserProfileActivity extends Activity {
             if (response.contains("success")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("pushNotification", pushValue);
+                editor.putString("pushNotification", transformNotification(pushValue.toUpperCase()));
                 editor.putString("age", ageValue);
-                editor.putString("gender", genderValue);
+                editor.putString("gender", transformGender(genderValue.toUpperCase()));
                 editor.apply();
             } else {
                 Toast.makeText(getApplicationContext(), "Update Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
@@ -125,5 +126,25 @@ public class UserProfileActivity extends Activity {
                 if (checked)
                     break;
         }
+    }
+
+    private String transformGender(String gender) {
+        if (TextUtils.equals(gender, "HE")) {
+            return "M";
+        } else if (TextUtils.equals(gender, "SHE")) {
+            return "F";
+        } else if (TextUtils.equals(gender, "OTHERS")) {
+            return "O";
+        }
+        return null;
+    }
+
+    private String transformNotification(String notify) {
+        if (TextUtils.equals(notify, "YES")) {
+            return "Y";
+        } else if (TextUtils.equals(notify, "NO")) {
+            return "N";
+        }
+        return null;
     }
 }
