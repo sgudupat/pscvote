@@ -58,4 +58,11 @@ public class SignInPageActivity extends Activity {
         } catch (Exception e) {
         }
     }
+	public void forgotPassword(View view) {
+    	
+    	Log.i("inside forgot"," forgot password function");
+    	 Intent intent = new Intent(this, ForgotPasswordActivity.class);
+         startActivity(intent);
+    
+    }
 }
