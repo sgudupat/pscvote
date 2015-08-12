@@ -2,8 +2,10 @@ package com.psc.vote.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -36,9 +38,11 @@ public class CampaignActivity extends Activity {
         Intent intent = getIntent();
         anchorName = intent.getStringExtra("anchorName");
         clientName = intent.getStringExtra("clientName");
-        username = intent.getStringExtra("username");
         campaignId = intent.getStringExtra("campaignId");
         readOnly = intent.getStringExtra("readOnly");
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        username = preferences.getString("username", "");
         openChart(campaignId);
     }
 
@@ -119,14 +123,12 @@ public class CampaignActivity extends Activity {
         intent.putExtra("anchorName", anchorName);
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
-        intent.putExtra("username", username);
         intent.putExtra("readOnly", readOnly);
         startActivity(intent);
     }
 
     public void goToLandingPage(View view) {
         Intent intent = new Intent(this, SearchActivity.class);
-        intent.putExtra("username", username);
         startActivity(intent);
     }
 }

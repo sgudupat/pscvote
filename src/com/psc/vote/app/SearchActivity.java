@@ -63,7 +63,6 @@ public class SearchActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
-                intent.putExtra("username", userName);
                 intent.putExtra("anchorName", adapter.getItem(position).getAnchorName());
                 intent.putExtra("clientName", adapter.getItem(position).getClientName());
                 intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());

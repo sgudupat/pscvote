@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class RewardActivity extends Activity {
-    final Context context = this;
+
     ArrayList<Reward> reward = new ArrayList<Reward>();
 
     @Override
@@ -33,7 +33,7 @@ public class RewardActivity extends Activity {
     }
 
     private String rewardDetails() {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String sname = preferences.getString("username", "");
         Log.i("session name", sname);
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();

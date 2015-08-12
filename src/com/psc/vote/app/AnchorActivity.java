@@ -2,7 +2,9 @@ package com.psc.vote.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -35,9 +37,11 @@ public class AnchorActivity extends Activity {
         anchorName = intent.getStringExtra("anchorName");
         clientName = intent.getStringExtra("clientName");
         campaignId = intent.getStringExtra("campaignId");
-        username = intent.getStringExtra("username");
         readOnly = intent.getStringExtra("readOnly");
         Log.i("campaignId:", campaignId);
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        username = preferences.getString("username", "");
         String response = fetchCampaignInfo(campaignId);
         Log.i("inside displayCampaign", "displayCampaign");
         try {
@@ -55,18 +59,22 @@ public class AnchorActivity extends Activity {
                 Log.i("option", option.toString());
                 if (i == 0) {
                     RadioButton option1 = (RadioButton) findViewById(R.id.campaign_opt1);
+                    option1.setVisibility(View.VISIBLE);
                     option1.setText((String) option.get("option_value"));
                     option1.setHint((String) option.get("option_id"));
                 } else if (i == 1) {
                     RadioButton option2 = (RadioButton) findViewById(R.id.campaign_opt2);
+                    option2.setVisibility(View.VISIBLE);
                     option2.setText((String) option.get("option_value"));
                     option2.setHint((String) option.get("option_id"));
                 } else if (i == 2) {
                     RadioButton option3 = (RadioButton) findViewById(R.id.campaign_opt3);
+                    option3.setVisibility(View.VISIBLE);
                     option3.setText((String) option.get("option_value"));
                     option3.setHint((String) option.get("option_id"));
                 } else if (i == 3) {
                     RadioButton option4 = (RadioButton) findViewById(R.id.campaign_opt4);
+                    option4.setVisibility(View.VISIBLE);
                     option4.setText((String) option.get("option_value"));
                     option4.setHint((String) option.get("option_id"));
                 }
@@ -93,7 +101,6 @@ public class AnchorActivity extends Activity {
         intent.putExtra("anchorName", anchorName);
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
-        intent.putExtra("username", username);
         intent.putExtra("readOnly", "N");
         startActivity(intent);
     }
@@ -139,7 +146,6 @@ public class AnchorActivity extends Activity {
         intent.putExtra("anchorName", anchorName);
         intent.putExtra("clientName", clientName);
         intent.putExtra("campaignId", campaignId);
-        intent.putExtra("username", username);
         intent.putExtra("readOnly", readOnly);
         startActivity(intent);
     }

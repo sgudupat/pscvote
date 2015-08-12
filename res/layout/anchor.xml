@@ -66,25 +66,25 @@
                     android:id="@+id/campaign_opt1"
                     android:layout_width="238dp"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioSelected"/>
+                    android:onClick="onRadioSelected" android:visibility="invisible"/>
 
             <RadioButton
                     android:id="@+id/campaign_opt2"
                     android:layout_width="233dp"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioSelected"/>
+                    android:onClick="onRadioSelected" android:visibility="invisible"/>
 
             <RadioButton
                     android:id="@+id/campaign_opt3"
                     android:layout_width="233dp"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioSelected"/>
+                    android:onClick="onRadioSelected" android:visibility="invisible"/>
 
             <RadioButton
                     android:id="@+id/campaign_opt4"
                     android:layout_width="235dp"
                     android:layout_height="wrap_content"
-                    android:onClick="onRadioSelected"/>
+                    android:onClick="onRadioSelected" android:visibility="invisible"/>
 
         </RadioGroup>
     </LinearLayout>
