@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.vote.app" android:versionCode="1" android:versionName="1.0">
+          package="com.vote.app" android:versionCode="2" android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -22,7 +22,7 @@
         <activity android:name=".ClientDetailActivity" android:label="@string/detail"></activity>
         <activity android:name=".UserProfileActivity" android:label="@string/myProfile"></activity>
         <activity android:name=".RewardDetailActivity" android:label="@string/rewarddetail"></activity>
-        <activity android:name=".ForgotPasswordActivity" android:label="@string/forgotPasswordHeading"></activity>
+        <activity android:name=".ForgotPasswordActivity" android:label="@string/rewarddetail"></activity>
         <activity android:name="org.achartengine.GraphicalActivity"/>
     </application>
 </manifest>
