@@ -26,6 +26,7 @@ public class AnchorActivity extends Activity {
     String anchorName;
     String clientName;
     String readOnly;
+    String status;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class AnchorActivity extends Activity {
         clientName = intent.getStringExtra("clientName");
         campaignId = intent.getStringExtra("campaignId");
         readOnly = intent.getStringExtra("readOnly");
+        status = intent.getStringExtra("status");
         Log.i("campaignId:", campaignId);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -80,7 +82,7 @@ public class AnchorActivity extends Activity {
                 }
             }
             //If Read Only then Done button will not be displayed
-            if (!TextUtils.isEmpty(readOnly) && TextUtils.equals(readOnly, "Y")) {
+            if (!TextUtils.isEmpty(readOnly) && (TextUtils.equals(readOnly, "Y")||(TextUtils.equals(status, "STOPPED")))) {
                 Button doneButton = (Button) findViewById(R.id.doneButton);
                 doneButton.setVisibility(View.INVISIBLE);
             }

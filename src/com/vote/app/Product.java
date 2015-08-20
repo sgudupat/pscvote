@@ -11,18 +11,20 @@ public class Product {
     private String campaignId;
     private String campaignStatusDescription;
     private Date campaignEndDate;
+    private String status;
 
     //Variables that hold the information for sending to Anchor and Client detail page
     private Date anchorCreationDate;
     private String clientWebsiteAddress;
     private String clientInfo;
 
-    public Product(String anchorName, String clientName, String campaignId, Date endDate, Date creationDate, String websiteURL, String clientInfo) {
+    public Product(String anchorName, String clientName, String campaignId, Date endDate,String status, Date creationDate, String websiteURL, String clientInfo) {
         super();
         this.anchorName = anchorName;
         this.clientName = clientName;
         this.campaignId = campaignId;
         this.campaignEndDate = endDate;
+        this.status = status;
 
         this.anchorCreationDate = creationDate;
         this.clientWebsiteAddress = websiteURL;
@@ -32,6 +34,13 @@ public class Product {
     public String getAnchorName() {
         return anchorName;
     }
+    public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
     public void setAnchorName(String anchorName) {
         this.anchorName = anchorName;

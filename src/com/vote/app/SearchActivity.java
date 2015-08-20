@@ -67,6 +67,7 @@ public class SearchActivity extends Activity {
                 intent.putExtra("clientName", adapter.getItem(position).getClientName());
                 intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());
                 intent.putExtra("readOnly", adapter.getItem(position).isCampaignExpired());
+                intent.putExtra("status",  adapter.getItem(position).getStatus());
                 startActivity(intent);
             }
         });
@@ -97,7 +98,8 @@ public class SearchActivity extends Activity {
                     String cid = jsonobject2.getString("campaign_id");
                     String endDate = jsonobject2.getString("end_date");  //2015-08-04
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
+                    String status = jsonobject2.getString("status");  //2015-08-04
+                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status,dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
                 }
             }
         } catch (Exception e) {
