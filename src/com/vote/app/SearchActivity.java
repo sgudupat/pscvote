@@ -1,16 +1,21 @@
-package com.vote.app;
+package com.psc.vote.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -50,7 +55,43 @@ public class SearchActivity extends Activity {
             }
         });
     }
-
+    @Override 
+    public boolean onKeyDown(int keyCode, KeyEvent event){  
+            //Changes 'back' button action  
+            if(keyCode==KeyEvent.KEYCODE_BACK)  
+            {  
+             //Include the code here
+             
+            	  AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+            			  SearchActivity.this);
+                  // Setting Dialog Title
+                  alertDialog.setTitle("Leave application?");
+                  // Setting Dialog Message
+                  alertDialog.setMessage("Are you sure you want to leave the application?");
+                  // Setting Icon to Dialog
+                //  alertDialog.setIcon(R.drawable.dialog_icon);
+                  // Setting Positive "Yes" Button
+                  alertDialog.setPositiveButton("YES",
+                          new DialogInterface.OnClickListener() {
+                              public void onClick(DialogInterface dialog, int which) {
+                              	  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SearchActivity.this);
+                                    preferences.edit().clear().commit();
+                                  finish();
+                              }
+                          });
+                  // Setting Negative "NO" Button
+                  alertDialog.setNegativeButton("NO",
+                          new DialogInterface.OnClickListener() {
+                              public void onClick(DialogInterface dialog, int which) {
+                                  // Write your code here to invoke NO event
+                                  dialog.cancel();
+                              }
+                          });
+                  // Showing Alert Message
+                  alertDialog.show();
+            }  
+            return true;  
+        }
     private void buildListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
         // Adding items to list view
@@ -103,50 +144,42 @@ public class SearchActivity extends Activity {
                 }
             }
         } catch (Exception e) {
+        	  AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+        			  SearchActivity.this);
+              // Setting Dialog Title
+              alertDialog.setTitle("Error Message");
+              // Setting Dialog Message
+              alertDialog.setMessage(e.getMessage());
+              // Setting Icon to Dialog
+            //  alertDialog.setIcon(R.drawable.dialog_icon);
+              // Setting Positive "Yes" Button
+              alertDialog.setPositiveButton("YES",
+                      new DialogInterface.OnClickListener() {
+                          public void onClick(DialogInterface dialog, int which) {
+                          	 
+                              finish();
+                          }
+                      });
+              // Setting Negative "NO" Button
+              alertDialog.setNegativeButton("NO",
+                      new DialogInterface.OnClickListener() {
+                          public void onClick(DialogInterface dialog, int which) {
+                              // Write your code here to invoke NO event
+                              dialog.cancel();
+                          }
+                      });
+              // Showing Alert Message
+              alertDialog.show();
+        	
         }
         return items;
     }
-	  @Override 
-    public boolean onKeyDown(int keyCode, KeyEvent event){  
-            //Changes 'back' button action  
-            if(keyCode==KeyEvent.KEYCODE_BACK)  
-            {  
-             //Include the code here
-             	Log.i("back button","b2 pressed");
-            	Toast.makeText(getApplicationContext(), "are you shore you want to logout2!!!", Toast.LENGTH_LONG).show();
-            	  AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-            			  SearchActivity.this);
-                  // Setting Dialog Title
-                  alertDialog.setTitle("Leave application?");
-                  // Setting Dialog Message
-                  alertDialog.setMessage("Are you sure you want to leave the application?");
-                  // Setting Icon to Dialog
-                //  alertDialog.setIcon(R.drawable.dialog_icon);
-                  // Setting Positive "Yes" Button
-                  alertDialog.setPositiveButton("YES",
-                          new DialogInterface.OnClickListener() {
-                              public void onClick(DialogInterface dialog, int which) {
-                              	  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SearchActivity.this);
-                                    preferences.edit().clear().commit();
-                                  finish();
-                              }
-                          });
-                  // Setting Negative "NO" Button
-                  alertDialog.setNegativeButton("NO",
-                          new DialogInterface.OnClickListener() {
-                              public void onClick(DialogInterface dialog, int which) {
-                                  // Write your code here to invoke NO event
-                                  dialog.cancel();
-                              }
-                          });
-                  // Showing Alert Message
-                  alertDialog.show();
-            }  
-            return true;  
-        }
 
     public void searchResult(View view) {
         buildListView();
+    }
+    public void recentAnchors(View view) {
+        buildListView1();
     }
 
     public void trendingAnchors(View view) {
@@ -179,4 +212,83 @@ public class SearchActivity extends Activity {
     public void showRewardsSummary(View view) {
 
     }
+    private void buildListView1() {
+        ListView listView = (ListView) findViewById(R.id.list_view);
+        // Adding items to list view
+        // 1. pass context and data to the custom adapter
+        Log.i("inside build list", "list built");
+        final MyAdapter adapter = new MyAdapter(SearchActivity.this, generateData1());
+        //2. setListAdapter
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(SearchActivity.this, AnchorActivity.class);
+                intent.putExtra("anchorName", adapter.getItem(position).getAnchorName());
+                intent.putExtra("clientName", adapter.getItem(position).getClientName());
+                intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());
+                intent.putExtra("readOnly", adapter.getItem(position).isCampaignExpired());
+                intent.putExtra("status",  adapter.getItem(position).getStatus());
+                startActivity(intent);
+            }
+        });
+    }
+
+    private ArrayList<Product> generateData1() {
+        try {
+            //Populate from Server
+            String anchors = getAnchors1();
+            items.clear();
+            //Build the list
+            JSONArray jsonArrayr = new JSONArray(anchors);
+            for (int i = 0; i < jsonArrayr.length(); i++) {
+            	if(i<5){
+            	Log.i("recent search","inside for loop");
+                JSONObject jsonobject = jsonArrayr.getJSONObject(i);
+                String aname = jsonobject.getString("anchor_name");
+                String client = jsonobject.getString("client_name");
+                String anchorCreationDate = jsonobject.getString("creation_date");  //2015-08-04
+                String websiteURL = jsonobject.getString("website_url");
+                String clientInfo = jsonobject.getString("client_info");
+                Log.i("anchor name", aname);
+                Log.i("client name", client);
+                String cname = jsonobject.getString("campaigns");
+                Log.i("campaign name", cname);
+                JSONArray jsonArrayr2 = new JSONArray(cname);
+                for (int j = 0; j < jsonArrayr2.length(); j++) {
+                    Log.i("client id", "inside campaign");
+                    JSONObject jsonobject2 = jsonArrayr2.getJSONObject(j);
+                    String cid = jsonobject2.getString("campaign_id");
+                    String endDate = jsonobject2.getString("end_date");  //2015-08-04
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    String status = jsonobject2.getString("status");  //2015-08-04
+                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status,dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
+                }
+            }
+            }
+            
+        } catch (Exception e) {
+        	Log.e("register", e.getMessage() + "");
+        }
+        return items;
+    }
+
+    private String getAnchors1() {
+        
+        Log.i("triggerrecent:", "recent search");
+        final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+        Log.i("recent username", userName);
+        postParameters.add(new BasicNameValuePair("userName", userName));
+        try {
+            Log.i("recentsearchActivity", "try");
+            String response2 = SimpleHttpClient.executeHttpPost("/recentSearchAnchors", postParameters);
+            Log.i("Response 2:", response2);
+            return response2;
+        } catch (Exception e) {
+            String errorMsg = e.getMessage() + "";
+            Log.e("LoginPageActivity", errorMsg);
+            return "fail";
+        }
+    }
+
 }
