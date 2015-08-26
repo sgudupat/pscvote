@@ -14,7 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import com.psc.vote.app.AnchorActivity;
+import com.vote.app.AnchorActivity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
