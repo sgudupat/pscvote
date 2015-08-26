@@ -55,12 +55,12 @@ public class AnchorActivity extends Activity {
             anchor.setText(anchorName);
             client.setText(clientName);
             question.setText((String) campaignJSON.get("question"));
-		     Log.i("userVoted", userVoted);
-		     if  (TextUtils.equals(userVoted, "Y")){
-		    	 setContentView(R.layout.update_campaign);
-		    	 Log.i("SignInPageActivity", "inside user anchor page");
-		     }
-		     
+            Log.i("userVoted", userVoted);
+            if (TextUtils.equals(userVoted, "Y")) {
+                setContentView(R.layout.update_campaign);
+                Log.i("SignInPageActivity", "inside user anchor page");
+            }
+
             JSONArray options = new JSONArray((String) campaignJSON.get("options"));
             for (int i = 0; i < options.length(); i++) {
                 JSONObject option = options.getJSONObject(i);
@@ -89,7 +89,7 @@ public class AnchorActivity extends Activity {
                 }
             }
             //If Read Only then Done button will not be displayed
-            if (!TextUtils.isEmpty(readOnly) && (TextUtils.equals(readOnly, "Y")||(TextUtils.equals(status, "STOPPED")))) {
+            if (!TextUtils.isEmpty(readOnly) && (TextUtils.equals(readOnly, "Y") || (TextUtils.equals(status, "STOPPED")))) {
                 Button doneButton = (Button) findViewById(R.id.doneButton);
                 doneButton.setVisibility(View.INVISIBLE);
             }

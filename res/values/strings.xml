@@ -35,7 +35,9 @@
     <string name="detail">Anchor and Client details</string>
     <string name="myProfile">My Profile</string>
     <string name="rewarddetail">RewardDetail</string>
-    <string name="forgot"><u>Forgot Password</u></string>
+    <string name="forgot">
+        <u>Forgot Password</u>
+    </string>
     <string name="otp">Enter OTP</string>
     <string name="otpButton">Request OTP</string>
     <string name="forgotp">ForgotPassword</string>

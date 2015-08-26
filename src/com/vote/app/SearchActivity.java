@@ -14,8 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
-
+import com.psc.vote.app.AnchorActivity;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -55,43 +54,44 @@ public class SearchActivity extends Activity {
             }
         });
     }
-    @Override 
-    public boolean onKeyDown(int keyCode, KeyEvent event){  
-            //Changes 'back' button action  
-            if(keyCode==KeyEvent.KEYCODE_BACK)  
-            {  
-             //Include the code here
-             
-            	  AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-            			  SearchActivity.this);
-                  // Setting Dialog Title
-                  alertDialog.setTitle("Leave application?");
-                  // Setting Dialog Message
-                  alertDialog.setMessage("Are you sure you want to leave the application?");
-                  // Setting Icon to Dialog
-                //  alertDialog.setIcon(R.drawable.dialog_icon);
-                  // Setting Positive "Yes" Button
-                  alertDialog.setPositiveButton("YES",
-                          new DialogInterface.OnClickListener() {
-                              public void onClick(DialogInterface dialog, int which) {
-                              	  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SearchActivity.this);
-                                    preferences.edit().clear().commit();
-                                  finish();
-                              }
-                          });
-                  // Setting Negative "NO" Button
-                  alertDialog.setNegativeButton("NO",
-                          new DialogInterface.OnClickListener() {
-                              public void onClick(DialogInterface dialog, int which) {
-                                  // Write your code here to invoke NO event
-                                  dialog.cancel();
-                              }
-                          });
-                  // Showing Alert Message
-                  alertDialog.show();
-            }  
-            return true;  
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //Changes 'back' button action
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            //Include the code here
+
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                    SearchActivity.this);
+            // Setting Dialog Title
+            alertDialog.setTitle("Leave application?");
+            // Setting Dialog Message
+            alertDialog.setMessage("Are you sure you want to leave the application?");
+            // Setting Icon to Dialog
+            //  alertDialog.setIcon(R.drawable.dialog_icon);
+            // Setting Positive "Yes" Button
+            alertDialog.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(SearchActivity.this);
+                            preferences.edit().clear().commit();
+                            finish();
+                        }
+                    });
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to invoke NO event
+                            dialog.cancel();
+                        }
+                    });
+            // Showing Alert Message
+            alertDialog.show();
         }
+        return true;
+    }
+
     private void buildListView() {
         ListView listView = (ListView) findViewById(R.id.list_view);
         // Adding items to list view
@@ -108,7 +108,7 @@ public class SearchActivity extends Activity {
                 intent.putExtra("clientName", adapter.getItem(position).getClientName());
                 intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());
                 intent.putExtra("readOnly", adapter.getItem(position).isCampaignExpired());
-                intent.putExtra("status",  adapter.getItem(position).getStatus());
+                intent.putExtra("status", adapter.getItem(position).getStatus());
                 startActivity(intent);
             }
         });
@@ -140,37 +140,37 @@ public class SearchActivity extends Activity {
                     String endDate = jsonobject2.getString("end_date");  //2015-08-04
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String status = jsonobject2.getString("status");  //2015-08-04
-                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status,dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
+                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status, dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
                 }
             }
         } catch (Exception e) {
-        	  AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-        			  SearchActivity.this);
-              // Setting Dialog Title
-              alertDialog.setTitle("Error Message");
-              // Setting Dialog Message
-              alertDialog.setMessage(e.getMessage());
-              // Setting Icon to Dialog
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
+                    SearchActivity.this);
+            // Setting Dialog Title
+            alertDialog.setTitle("Error Message");
+            // Setting Dialog Message
+            alertDialog.setMessage(e.getMessage());
+            // Setting Icon to Dialog
             //  alertDialog.setIcon(R.drawable.dialog_icon);
-              // Setting Positive "Yes" Button
-              alertDialog.setPositiveButton("YES",
-                      new DialogInterface.OnClickListener() {
-                          public void onClick(DialogInterface dialog, int which) {
-                          	 
-                              finish();
-                          }
-                      });
-              // Setting Negative "NO" Button
-              alertDialog.setNegativeButton("NO",
-                      new DialogInterface.OnClickListener() {
-                          public void onClick(DialogInterface dialog, int which) {
-                              // Write your code here to invoke NO event
-                              dialog.cancel();
-                          }
-                      });
-              // Showing Alert Message
-              alertDialog.show();
-        	
+            // Setting Positive "Yes" Button
+            alertDialog.setPositiveButton("YES",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            finish();
+                        }
+                    });
+            // Setting Negative "NO" Button
+            alertDialog.setNegativeButton("NO",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // Write your code here to invoke NO event
+                            dialog.cancel();
+                        }
+                    });
+            // Showing Alert Message
+            alertDialog.show();
+
         }
         return items;
     }
@@ -178,6 +178,7 @@ public class SearchActivity extends Activity {
     public void searchResult(View view) {
         buildListView();
     }
+
     public void recentAnchors(View view) {
         buildListView1();
     }
@@ -212,6 +213,7 @@ public class SearchActivity extends Activity {
     public void showRewardsSummary(View view) {
 
     }
+
     private void buildListView1() {
         ListView listView = (ListView) findViewById(R.id.list_view);
         // Adding items to list view
@@ -228,7 +230,7 @@ public class SearchActivity extends Activity {
                 intent.putExtra("clientName", adapter.getItem(position).getClientName());
                 intent.putExtra("campaignId", adapter.getItem(position).getCampaignId());
                 intent.putExtra("readOnly", adapter.getItem(position).isCampaignExpired());
-                intent.putExtra("status",  adapter.getItem(position).getStatus());
+                intent.putExtra("status", adapter.getItem(position).getStatus());
                 startActivity(intent);
             }
         });
@@ -242,39 +244,39 @@ public class SearchActivity extends Activity {
             //Build the list
             JSONArray jsonArrayr = new JSONArray(anchors);
             for (int i = 0; i < jsonArrayr.length(); i++) {
-            	if(i<5){
-            	Log.i("recent search","inside for loop");
-                JSONObject jsonobject = jsonArrayr.getJSONObject(i);
-                String aname = jsonobject.getString("anchor_name");
-                String client = jsonobject.getString("client_name");
-                String anchorCreationDate = jsonobject.getString("creation_date");  //2015-08-04
-                String websiteURL = jsonobject.getString("website_url");
-                String clientInfo = jsonobject.getString("client_info");
-                Log.i("anchor name", aname);
-                Log.i("client name", client);
-                String cname = jsonobject.getString("campaigns");
-                Log.i("campaign name", cname);
-                JSONArray jsonArrayr2 = new JSONArray(cname);
-                for (int j = 0; j < jsonArrayr2.length(); j++) {
-                    Log.i("client id", "inside campaign");
-                    JSONObject jsonobject2 = jsonArrayr2.getJSONObject(j);
-                    String cid = jsonobject2.getString("campaign_id");
-                    String endDate = jsonobject2.getString("end_date");  //2015-08-04
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    String status = jsonobject2.getString("status");  //2015-08-04
-                    items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status,dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
+                if (i < 5) {
+                    Log.i("recent search", "inside for loop");
+                    JSONObject jsonobject = jsonArrayr.getJSONObject(i);
+                    String aname = jsonobject.getString("anchor_name");
+                    String client = jsonobject.getString("client_name");
+                    String anchorCreationDate = jsonobject.getString("creation_date");  //2015-08-04
+                    String websiteURL = jsonobject.getString("website_url");
+                    String clientInfo = jsonobject.getString("client_info");
+                    Log.i("anchor name", aname);
+                    Log.i("client name", client);
+                    String cname = jsonobject.getString("campaigns");
+                    Log.i("campaign name", cname);
+                    JSONArray jsonArrayr2 = new JSONArray(cname);
+                    for (int j = 0; j < jsonArrayr2.length(); j++) {
+                        Log.i("client id", "inside campaign");
+                        JSONObject jsonobject2 = jsonArrayr2.getJSONObject(j);
+                        String cid = jsonobject2.getString("campaign_id");
+                        String endDate = jsonobject2.getString("end_date");  //2015-08-04
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String status = jsonobject2.getString("status");  //2015-08-04
+                        items.add(new Product(aname, client, cid, dateFormat.parse(endDate), status, dateFormat.parse(anchorCreationDate), websiteURL, clientInfo));
+                    }
                 }
             }
-            }
-            
+
         } catch (Exception e) {
-        	Log.e("register", e.getMessage() + "");
+            Log.e("register", e.getMessage() + "");
         }
         return items;
     }
 
     private String getAnchors1() {
-        
+
         Log.i("triggerrecent:", "recent search");
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         Log.i("recent username", userName);

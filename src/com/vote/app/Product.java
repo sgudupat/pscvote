@@ -18,7 +18,7 @@ public class Product {
     private String clientWebsiteAddress;
     private String clientInfo;
 
-    public Product(String anchorName, String clientName, String campaignId, Date endDate,String status, Date creationDate, String websiteURL, String clientInfo) {
+    public Product(String anchorName, String clientName, String campaignId, Date endDate, String status, Date creationDate, String websiteURL, String clientInfo) {
         super();
         this.anchorName = anchorName;
         this.clientName = clientName;
@@ -34,16 +34,17 @@ public class Product {
     public String getAnchorName() {
         return anchorName;
     }
-    public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
     public void setAnchorName(String anchorName) {
         this.anchorName = anchorName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getClientName() {
