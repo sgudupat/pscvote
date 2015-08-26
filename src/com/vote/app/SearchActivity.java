@@ -60,9 +60,7 @@ public class SearchActivity extends Activity {
         //Changes 'back' button action
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //Include the code here
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                    SearchActivity.this);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(SearchActivity.this);
             // Setting Dialog Title
             alertDialog.setTitle("Leave application?");
             // Setting Dialog Message
@@ -144,8 +142,7 @@ public class SearchActivity extends Activity {
                 }
             }
         } catch (Exception e) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                    SearchActivity.this);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(SearchActivity.this);
             // Setting Dialog Title
             alertDialog.setTitle("Error Message");
             // Setting Dialog Message
@@ -153,15 +150,14 @@ public class SearchActivity extends Activity {
             // Setting Icon to Dialog
             //  alertDialog.setIcon(R.drawable.dialog_icon);
             // Setting Positive "Yes" Button
-            alertDialog.setPositiveButton("YES",
+            alertDialog.setPositiveButton("Ok",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
                             finish();
                         }
                     });
             // Setting Negative "NO" Button
-            alertDialog.setNegativeButton("NO",
+            alertDialog.setNegativeButton("Cancel",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Write your code here to invoke NO event
@@ -170,7 +166,6 @@ public class SearchActivity extends Activity {
                     });
             // Showing Alert Message
             alertDialog.show();
-
         }
         return items;
     }
