@@ -1,4 +1,4 @@
-package com.vote.app;
+package com.psc.vote.app;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -27,6 +27,7 @@ public class AnchorActivity extends Activity {
     String clientName;
     String readOnly;
     String status;
+    String userVoted;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,12 @@ public class AnchorActivity extends Activity {
             anchor.setText(anchorName);
             client.setText(clientName);
             question.setText((String) campaignJSON.get("question"));
+		     Log.i("userVoted", userVoted);
+		     if  (TextUtils.equals(userVoted, "Y")){
+		    	 setContentView(R.layout.update_campaign);
+		    	 Log.i("SignInPageActivity", "inside user anchor page");
+		     }
+		     
             JSONArray options = new JSONArray((String) campaignJSON.get("options"));
             for (int i = 0; i < options.length(); i++) {
                 JSONObject option = options.getJSONObject(i);
@@ -111,6 +118,7 @@ public class AnchorActivity extends Activity {
         Log.i("fetchCampaignInfo:", "fetchCampaignInfo");
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("campaignId", campaignId));
+        postParameters.add(new BasicNameValuePair("userName", username));
         try {
             String response = SimpleHttpClient.executeHttpPost("/getCampaign", postParameters);
             Log.i("Response:", response);
