@@ -8,10 +8,7 @@ import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
+import android.widget.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
@@ -33,7 +30,7 @@ public class AnchorActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.anchor);
-        Log.i("SignInPageActivity", "inside user anchor page");
+        Log.i("AnchorActivity", "inside user anchor page");
         // fetch value from key-value pair and make it visible on TextView.
         Intent intent = getIntent();
         anchorName = intent.getStringExtra("anchorName");
@@ -54,14 +51,51 @@ public class AnchorActivity extends Activity {
             JSONObject campaignJSON = new JSONObject(response);
             anchor.setText(anchorName);
             client.setText(clientName);
-            question.setText((String) campaignJSON.get("question"));
+            String questionValue = campaignJSON.getString("question");
+            userVoted = campaignJSON.getString("userVoted");
             Log.i("userVoted", userVoted);
+            question.setText(questionValue);
+            JSONArray options = new JSONArray((String) campaignJSON.get("options"));
             if (TextUtils.equals(userVoted, "Y")) {
-                setContentView(R.layout.update_campaign);
-                Log.i("SignInPageActivity", "inside user anchor page");
+                LinearLayout ql = (LinearLayout) findViewById(R.id.otp_value_ro); //Question Layout
+                LinearLayout ol = (LinearLayout) findViewById(R.id.option_ro); //Options Layout
+                ql.setVisibility(View.VISIBLE);
+                ol.setVisibility(View.VISIBLE);
+                TextView roQuestion = (TextView) findViewById(R.id.campaignPage_Question_ro);
+                roQuestion.setText(questionValue);
+                for (int i = 0; i < options.length(); i++) {
+                    JSONObject option = options.getJSONObject(i);
+                    Log.i("option value:", String.valueOf(i));
+                    Log.i("option", option.toString());
+                    if (i == 0) {
+                        RadioButton option1 = (RadioButton) findViewById(R.id.campaign_ro_opt1);
+                        option1.setVisibility(View.VISIBLE);
+                        option1.setText((String) option.get("option_value"));
+                        option1.setHint((String) option.get("option_id"));
+                    } else if (i == 1) {
+                        RadioButton option2 = (RadioButton) findViewById(R.id.campaign_ro_opt2);
+                        option2.setVisibility(View.VISIBLE);
+                        option2.setText((String) option.get("option_value"));
+                        option2.setHint((String) option.get("option_id"));
+                    } else if (i == 2) {
+                        RadioButton option3 = (RadioButton) findViewById(R.id.campaign_ro_opt3);
+                        option3.setVisibility(View.VISIBLE);
+                        option3.setText((String) option.get("option_value"));
+                        option3.setHint((String) option.get("option_id"));
+                    } else if (i == 3) {
+                        RadioButton option4 = (RadioButton) findViewById(R.id.campaign_ro_opt4);
+                        option4.setVisibility(View.VISIBLE);
+                        option4.setText((String) option.get("option_value"));
+                        option4.setHint((String) option.get("option_id"));
+                    } else if (i == 4) {
+                        RadioButton option5 = (RadioButton) findViewById(R.id.campaign_ro_opt5);
+                        option5.setVisibility(View.VISIBLE);
+                        option5.setText((String) option.get("option_value"));
+                        option5.setHint((String) option.get("option_id"));
+                    }
+                }
             }
 
-            JSONArray options = new JSONArray((String) campaignJSON.get("options"));
             for (int i = 0; i < options.length(); i++) {
                 JSONObject option = options.getJSONObject(i);
                 Log.i("option value:", String.valueOf(i));
@@ -86,6 +120,11 @@ public class AnchorActivity extends Activity {
                     option4.setVisibility(View.VISIBLE);
                     option4.setText((String) option.get("option_value"));
                     option4.setHint((String) option.get("option_id"));
+                } else if (i == 4) {
+                    RadioButton option5 = (RadioButton) findViewById(R.id.campaign_opt5);
+                    option5.setVisibility(View.VISIBLE);
+                    option5.setText((String) option.get("option_value"));
+                    option5.setHint((String) option.get("option_id"));
                 }
             }
             //If Read Only then Done button will not be displayed
