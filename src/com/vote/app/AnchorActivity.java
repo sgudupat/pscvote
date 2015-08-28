@@ -25,6 +25,7 @@ public class AnchorActivity extends Activity {
     String readOnly;
     String status;
     String userVoted;
+    String selectedOption;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class AnchorActivity extends Activity {
             userVoted = campaignJSON.getString("userVoted");
             Log.i("userVoted", userVoted);
             question.setText(questionValue);
-            JSONArray options = new JSONArray((String) campaignJSON.get("options"));
+            JSONArray options = new JSONArray(campaignJSON.getString("options"));
             if (TextUtils.equals(userVoted, "Y")) {
                 LinearLayout ql = (LinearLayout) findViewById(R.id.otp_value_ro); //Question Layout
                 LinearLayout ol = (LinearLayout) findViewById(R.id.option_ro); //Options Layout
@@ -63,6 +64,9 @@ public class AnchorActivity extends Activity {
                 ol.setVisibility(View.VISIBLE);
                 TextView roQuestion = (TextView) findViewById(R.id.campaignPage_Question_ro);
                 roQuestion.setText(questionValue);
+                selectedOption = campaignJSON.getString("optionValue");
+                Log.i("Selected Value:", selectedOption);
+                String optionId, optionValue;
                 for (int i = 0; i < options.length(); i++) {
                     JSONObject option = options.getJSONObject(i);
                     Log.i("option value:", String.valueOf(i));
@@ -70,28 +74,58 @@ public class AnchorActivity extends Activity {
                     if (i == 0) {
                         RadioButton option1 = (RadioButton) findViewById(R.id.campaign_ro_opt1);
                         option1.setVisibility(View.VISIBLE);
-                        option1.setText((String) option.get("option_value"));
-                        option1.setHint((String) option.get("option_id"));
+                        optionId = option.getString("option_id");
+                        optionValue = option.getString("option_value");
+                        option1.setHint(optionId);
+                        option1.setText(optionValue);
+                        if (selectedOption.equals(optionId)) {
+                            option1.setChecked(true);
+                        }
+                        option1.setEnabled(false);
                     } else if (i == 1) {
                         RadioButton option2 = (RadioButton) findViewById(R.id.campaign_ro_opt2);
                         option2.setVisibility(View.VISIBLE);
-                        option2.setText((String) option.get("option_value"));
-                        option2.setHint((String) option.get("option_id"));
+                        optionId = option.getString("option_id");
+                        optionValue = option.getString("option_value");
+                        option2.setHint(optionId);
+                        option2.setText(optionValue);
+                        if (selectedOption.equals(optionId)) {
+                            option2.setChecked(true);
+                        }
+                        option2.setEnabled(false);
                     } else if (i == 2) {
                         RadioButton option3 = (RadioButton) findViewById(R.id.campaign_ro_opt3);
                         option3.setVisibility(View.VISIBLE);
-                        option3.setText((String) option.get("option_value"));
-                        option3.setHint((String) option.get("option_id"));
+                        optionId = option.getString("option_id");
+                        optionValue = option.getString("option_value");
+                        option3.setHint(optionId);
+                        option3.setText(optionValue);
+                        if (selectedOption.equals(optionId)) {
+                            option3.setChecked(true);
+                        }
+                        option3.setEnabled(false);
                     } else if (i == 3) {
                         RadioButton option4 = (RadioButton) findViewById(R.id.campaign_ro_opt4);
                         option4.setVisibility(View.VISIBLE);
-                        option4.setText((String) option.get("option_value"));
-                        option4.setHint((String) option.get("option_id"));
+                        optionId = option.getString("option_id");
+                        optionValue = option.getString("option_value");
+                        option4.setHint(optionId);
+                        option4.setText(optionValue);
+                        if (selectedOption.equals(optionId)) {
+                            option4.setChecked(true);
+                        }
+                        option4.setEnabled(false);
                     } else if (i == 4) {
                         RadioButton option5 = (RadioButton) findViewById(R.id.campaign_ro_opt5);
                         option5.setVisibility(View.VISIBLE);
-                        option5.setText((String) option.get("option_value"));
-                        option5.setHint((String) option.get("option_id"));
+                        optionId = option.getString("option_id");
+                        optionValue = option.getString("option_value");
+                        option5.setHint(optionId);
+                        option5.setText(optionValue);
+                        if (selectedOption.equals(optionId)) {
+                            option5.setChecked(true);
+                        }
+                        option5.setEnabled(false);
                     }
                 }
             }
@@ -103,28 +137,28 @@ public class AnchorActivity extends Activity {
                 if (i == 0) {
                     RadioButton option1 = (RadioButton) findViewById(R.id.campaign_opt1);
                     option1.setVisibility(View.VISIBLE);
-                    option1.setText((String) option.get("option_value"));
-                    option1.setHint((String) option.get("option_id"));
+                    option1.setText(option.getString("option_value"));
+                    option1.setHint(option.getString("option_id"));
                 } else if (i == 1) {
                     RadioButton option2 = (RadioButton) findViewById(R.id.campaign_opt2);
                     option2.setVisibility(View.VISIBLE);
-                    option2.setText((String) option.get("option_value"));
-                    option2.setHint((String) option.get("option_id"));
+                    option2.setText(option.getString("option_value"));
+                    option2.setHint(option.getString("option_id"));
                 } else if (i == 2) {
                     RadioButton option3 = (RadioButton) findViewById(R.id.campaign_opt3);
                     option3.setVisibility(View.VISIBLE);
-                    option3.setText((String) option.get("option_value"));
-                    option3.setHint((String) option.get("option_id"));
+                    option3.setText(option.getString("option_value"));
+                    option3.setHint(option.getString("option_id"));
                 } else if (i == 3) {
                     RadioButton option4 = (RadioButton) findViewById(R.id.campaign_opt4);
                     option4.setVisibility(View.VISIBLE);
-                    option4.setText((String) option.get("option_value"));
-                    option4.setHint((String) option.get("option_id"));
+                    option4.setText(option.getString("option_value"));
+                    option4.setHint(option.getString("option_id"));
                 } else if (i == 4) {
                     RadioButton option5 = (RadioButton) findViewById(R.id.campaign_opt5);
                     option5.setVisibility(View.VISIBLE);
-                    option5.setText((String) option.get("option_value"));
-                    option5.setHint((String) option.get("option_id"));
+                    option5.setText(option.getString("option_value"));
+                    option5.setHint(option.getString("option_id"));
                 }
             }
             //If Read Only then Done button will not be displayed
@@ -174,7 +208,13 @@ public class AnchorActivity extends Activity {
         postParameters.add(new BasicNameValuePair("username", userName));
         postParameters.add(new BasicNameValuePair("optionId", campaignOptionId));
         try {
-            String response = SimpleHttpClient.executeHttpPost("/submitVote", postParameters);
+            String response = null;
+            if (TextUtils.equals(userVoted, "Y")) {
+                postParameters.add(new BasicNameValuePair("oldOptionId", selectedOption));
+                response = SimpleHttpClient.executeHttpPost("/resubmitVote", postParameters);
+            } else {
+                response = SimpleHttpClient.executeHttpPost("/submitVote", postParameters);
+            }
             Log.i("Response:", response);
             return response;
         } catch (Exception e) {
