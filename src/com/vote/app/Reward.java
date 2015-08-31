@@ -7,17 +7,28 @@ public class Reward {
     private String rewardEdate;
 
     private String rewardDescription;
+    private String imageName;
 
     public Reward(String rewardName, String rewardDate, String rewardEdate,
-                  String rewardDescription) {
+                  String rewardDescription,String imageName) {
         super();
         this.rewardName = rewardName;
         this.rewardDate = rewardDate;
         this.rewardEdate = rewardEdate;
         this.rewardDescription = rewardDescription;
+        this.imageName=imageName;
+        
     }
 
-    public String getRewardName() {
+    public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
+
+	public String getRewardName() {
         return rewardName;
     }
 
@@ -57,3 +68,4 @@ public class Reward {
 
 
 }
+

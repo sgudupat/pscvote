@@ -74,6 +74,7 @@ public class RewardActivity extends Activity {
                         intent.putExtra("rewarddesc", temp.getRewardDescription());
                         intent.putExtra("rewardsdate", temp.getRewardDate());
                         intent.putExtra("rewardedate", temp.getRewardEdate());
+						 intent.putExtra("imageName", temp.getImageName());
                     }
                 }
                 startActivity(intent);
@@ -93,10 +94,11 @@ public class RewardActivity extends Activity {
                 String rdate = jsonobject.getString("start_date");
                 String edate = jsonobject.getString("end_date");
                 String rdesc = jsonobject.getString("reward_desc");
+				 String image=jsonobject.getString("reward_image");
                 Log.i("reward name", rname);
                 Log.i("reward date", rdate);
                 Log.i("descritpion name", rdesc);
-                reward.add(new Reward(rname, rdate, edate, rdesc));
+                reward.add(new Reward(rname, rdate, edate, rdesc,image));
             }
         } catch (JSONException e) {
             e.printStackTrace();
