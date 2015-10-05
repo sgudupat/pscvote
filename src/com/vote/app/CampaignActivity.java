@@ -24,111 +24,116 @@ import java.util.ArrayList;
 
 public class CampaignActivity extends Activity {
 
-    String anchorName;
-    String clientName;
-    String username;
-    String campaignId;
-    String readOnly;
+	String anchorName;
+	String clientName;
+	String username;
+	String campaignId;
+	String readOnly;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("SignInPageActivity", "inside user campaign page");
-        setContentView(R.layout.campaign);
-        Intent intent = getIntent();
-        anchorName = intent.getStringExtra("anchorName");
-        clientName = intent.getStringExtra("clientName");
-        campaignId = intent.getStringExtra("campaignId");
-        readOnly = intent.getStringExtra("readOnly");
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        username = preferences.getString("username", "");
-        openChart(campaignId);
-    }
+		setContentView(R.layout.campaign);
+		Intent intent = getIntent();
+		anchorName = intent.getStringExtra("anchorName");
+		clientName = intent.getStringExtra("clientName");
+		campaignId = intent.getStringExtra("campaignId");
+		readOnly = intent.getStringExtra("readOnly");
 
-    private void openChart(String campaignId) {
-        GraphicalView mChartView;
-        String response = "";
-        ArrayList<String> ageRange = new ArrayList<String>();
-        ArrayList<Integer> countValue = new ArrayList<Integer>();
-        TextView anchor = (TextView) findViewById(R.id.textView1);
-        TextView client = (TextView) findViewById(R.id.client);
+		SharedPreferences preferences = PreferenceManager
+				.getDefaultSharedPreferences(this);
+		username = preferences.getString("username", "");
+		openChart(campaignId);
+	}
 
-        int count = 0;
-        Log.i("displayCampaign:", "displayCampaign");
-        final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-        postParameters.add(new BasicNameValuePair("campaignId", campaignId));
+	private void openChart(String campaignId) {
+		GraphicalView mChartView;
+		String response = "";
+		ArrayList<String> ageRange = new ArrayList<String>();
+		ArrayList<Integer> countValue = new ArrayList<Integer>();
+		TextView anchor = (TextView) findViewById(R.id.textView1);
+		TextView client = (TextView) findViewById(R.id.client);
 
-        try {
-            response = SimpleHttpClient.executeHttpPost("/displayStats", postParameters);
-            Log.i("Response:", response);
-            JSONObject jsonobject = new JSONObject(response);
-            String anchorn = jsonobject.getString("anchor_id");
-            String clname = jsonobject.getString("client_name");
-            anchor.setText(anchorn);
-            client.setText(clname);
-            String Value = jsonobject.getString("values");
-            JSONArray jsonArray2 = new JSONArray(Value);
-            for (int j = 0; j < jsonArray2.length(); j++) {
-                Log.i("inside", "inside campaign");
-                jsonobject = jsonArray2.getJSONObject(j);
-                Log.i("campaign ", "json object built");
-                String ager = jsonobject.getString("age");
-                Log.i("agerane", ager);
-                String cntValue = jsonobject.getString("cnt_value");
-                Log.i("client id", cntValue);
-                count = Integer.parseInt(cntValue);
-                ageRange.add(ager);
-                countValue.add(count);
-            }
-        } catch (Exception e) {
-            Log.i("Response 2:Error:", e.getMessage());
-        }
-        // Pie Chart Section Names
-        // Color of each Pie Chart Sections
-        int[] colors = {Color.BLUE, Color.MAGENTA, Color.GREEN, Color.CYAN, Color.RED, Color.YELLOW};
+		int count = 0;
 
-        // Instantiating CategorySeries to plot Pie Chart
-        CategorySeries distributionSeries = new CategorySeries("Campaign Statistics");
-        for (Integer i = 0; i < countValue.size(); i++) {
-            // Adding a slice with its values and name to the Pie Chart
-            distributionSeries.add(ageRange.get(i), countValue.get(i));
-        }
+		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+		postParameters.add(new BasicNameValuePair("campaignId", campaignId));
 
-        // Instantiating a renderer for the Pie Chart
-        DefaultRenderer defaultRenderer = new DefaultRenderer();
-        for (Integer i = 0; i < countValue.size(); i++) {
-            SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
-            seriesRenderer.setColor(colors[i]);
-            seriesRenderer.setDisplayChartValues(true);
-            // Adding a renderer for a slice
-            defaultRenderer.addSeriesRenderer(seriesRenderer);
-        }
+		try {
+			response = SimpleHttpClient.executeHttpPost("/displayStats",
+					postParameters);
 
-        defaultRenderer.setChartTitle("Campaign Statistics");
-        defaultRenderer.setChartTitleTextSize(10);
-        defaultRenderer.setZoomButtonsVisible(false);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+			JSONObject jsonobject = new JSONObject(response);
+			String anchorn = jsonobject.getString("anchor_id");
+			String clname = jsonobject.getString("client_name");
+			anchor.setText(anchorn);
+			client.setText(clname);
+			String Value = jsonobject.getString("values");
+			JSONArray jsonArray2 = new JSONArray(Value);
+			for (int j = 0; j < jsonArray2.length(); j++) {
 
+				jsonobject = jsonArray2.getJSONObject(j);
 
-        // Creating an intent to plot bar chart using dataset and multipleRenderer
-        mChartView = ChartFactory.getPieChartView(this, distributionSeries, defaultRenderer);
-        layout.addView(mChartView);
-        // Start Activity
-        // startActivity(intent);
-    }
+				String ager = jsonobject.getString("age");
 
-    public void goToCampaign(View view) {
-        Intent intent = new Intent(this, AnchorActivity.class);
-        intent.putExtra("anchorName", anchorName);
-        intent.putExtra("clientName", clientName);
-        intent.putExtra("campaignId", campaignId);
-        intent.putExtra("readOnly", readOnly);
-        startActivity(intent);
-    }
+				String cntValue = jsonobject.getString("cnt_value");
 
-    public void goToLandingPage(View view) {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
-    }
+				count = Integer.parseInt(cntValue);
+				ageRange.add(ager);
+				countValue.add(count);
+			}
+		} catch (Exception e) {
+
+		}
+		// Pie Chart Section Names
+		// Color of each Pie Chart Sections
+		int[] colors = { Color.BLUE, Color.MAGENTA, Color.GREEN, Color.CYAN,
+				Color.RED, Color.YELLOW };
+
+		// Instantiating CategorySeries to plot Pie Chart
+		CategorySeries distributionSeries = new CategorySeries(
+				"Campaign Statistics");
+		for (Integer i = 0; i < countValue.size(); i++) {
+			// Adding a slice with its values and name to the Pie Chart
+			distributionSeries.add(ageRange.get(i), countValue.get(i));
+		}
+
+		// Instantiating a renderer for the Pie Chart
+		DefaultRenderer defaultRenderer = new DefaultRenderer();
+		for (Integer i = 0; i < countValue.size(); i++) {
+			SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
+			seriesRenderer.setColor(colors[i]);
+			seriesRenderer.setDisplayChartValues(true);
+			// Adding a renderer for a slice
+			defaultRenderer.addSeriesRenderer(seriesRenderer);
+		}
+
+		defaultRenderer.setChartTitle("Campaign Statistics");
+		defaultRenderer.setChartTitleTextSize(10);
+		defaultRenderer.setZoomButtonsVisible(false);
+		LinearLayout layout = (LinearLayout) findViewById(R.id.chart);
+
+		// Creating an intent to plot bar chart using dataset and
+		// multipleRenderer
+		mChartView = ChartFactory.getPieChartView(this, distributionSeries,
+				defaultRenderer);
+		layout.addView(mChartView);
+		// Start Activity
+		// startActivity(intent);
+	}
+
+	public void goToCampaign(View view) {
+		Intent intent = new Intent(this, AnchorActivity.class);
+		intent.putExtra("anchorName", anchorName);
+		intent.putExtra("clientName", clientName);
+		intent.putExtra("campaignId", campaignId);
+		intent.putExtra("readOnly", readOnly);
+		startActivity(intent);
+	}
+
+	public void goToLandingPage(View view) {
+		Intent intent = new Intent(this, SearchActivity.class);
+		startActivity(intent);
+	}
 }

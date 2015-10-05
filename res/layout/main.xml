@@ -15,12 +15,15 @@
             android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
             android:layout_marginTop="156dp"/>
 
-    <Button android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/signUpButton"
-            android:id="@+id/signUp"
-            android:onClick="signUpLandingPage"
-            android:layout_centerVertical="true" android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signIn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:hint="@string/signUpButton"
+        android:onClick="signUpLandingPage" />
 
 </RelativeLayout>
 

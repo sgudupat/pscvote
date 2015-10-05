@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.telephony.SmsManager;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -26,9 +28,13 @@ public class SignUpPageActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("SignUpPageActivity", "inside user registration page");
+        super.onCreate(savedInstanceState);        
         setContentView(R.layout.sign_up);
+        EditText password = (EditText) findViewById(R.id.signUpPwd);
+       
+
+        ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE))
+            .showSoftInput(password, InputMethodManager.SHOW_FORCED);
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.age_array, android.R.layout.simple_spinner_item);
@@ -59,9 +65,10 @@ public class SignUpPageActivity extends Activity {
     }
 
     public void register(View view) {
-        EditText username = (EditText) findViewById(R.id.fld_username);
+        EditText username = (EditText) findViewById(R.id.fld_username);       
         EditText mobile = (EditText) findViewById(R.id.fld_mbl);
         EditText password = (EditText) findViewById(R.id.signUpPwd);
+        password.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         RadioGroup gender = (RadioGroup) findViewById(R.id.myRadioGroup);
         RadioButton genderButton = (RadioButton) findViewById(gender.getCheckedRadioButtonId());
         String genderValue = (String) genderButton.getText();
@@ -69,8 +76,7 @@ public class SignUpPageActivity extends Activity {
         Spinner age = (Spinner) findViewById(R.id.spinner);
         String ageValue = age.getSelectedItem().toString();
 
-        String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);
-        Log.i("register:", "register");
+        String deviceId = Secure.getString(getContentResolver(), Secure.ANDROID_ID);       
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("username", username.getText().toString()));
         postParameters.add(new BasicNameValuePair("password", password.getText().toString()));
@@ -109,12 +115,11 @@ public class SignUpPageActivity extends Activity {
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // get user input and set it to result edit text
-                        String aotp = userInput.getText().toString();
-                        Log.i("alert dialog otp", aotp);
+                        String aotp = userInput.getText().toString();                        
                         if (aotp.equals(otp)) {
                             try {
                                 String response = SimpleHttpClient.executeHttpPost("/register", postParameters);
-                                Log.i("Response:", response);
+                                
                                 JSONObject jsonobject = new JSONObject(response);
                                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                                 SharedPreferences.Editor editor = prefs.edit();
@@ -125,8 +130,7 @@ public class SignUpPageActivity extends Activity {
                                 editor.putString("mobile", (String) jsonobject.get("mobile"));
                                 editor.commit();
                                 Intent intent = new Intent(context, SearchActivity.class);
-                                startActivity(intent);
-                                Log.i("inside otp if loop", "search activity started");
+                                startActivity(intent);                               
                             } catch (Exception e) {
                                 Log.e("register", e.getMessage() + "");
                                 Toast.makeText(getApplicationContext(), "Login Failed, Please Retry !!!", Toast.LENGTH_LONG).show();

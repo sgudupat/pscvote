@@ -18,8 +18,7 @@ public class UserProfileActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("UserProfileActivity", "inside user profile page");
+        super.onCreate(savedInstanceState);       
         setContentView(R.layout.profile);
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String username = preferences.getString("username", "");
@@ -76,19 +75,14 @@ public class UserProfileActivity extends Activity {
         RadioButton pushButton = (RadioButton) findViewById(push.getCheckedRadioButtonId());
         String pushValue = (String) pushButton.getText();
         Spinner age = (Spinner) findViewById(R.id.profile_age);
-        String ageValue = age.getSelectedItem().toString();
-        Log.i("username", usernameField.getText().toString());
-        Log.i("gender", genderValue);
-        Log.i("pushNotification", pushValue);
-        Log.i("age", ageValue);
+        String ageValue = age.getSelectedItem().toString();        
         final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
         postParameters.add(new BasicNameValuePair("username", usernameField.getText().toString()));
         postParameters.add(new BasicNameValuePair("gender", genderValue));
         postParameters.add(new BasicNameValuePair("age", ageValue));
         postParameters.add(new BasicNameValuePair("pushNotification", pushValue));
         try {
-            String response = SimpleHttpClient.executeHttpPost("/updateUser", postParameters);
-            Log.i("Response:", response);
+            String response = SimpleHttpClient.executeHttpPost("/updateUser", postParameters);           
             if (response.contains("success")) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -99,8 +93,7 @@ public class UserProfileActivity extends Activity {
             } else {
                 Toast.makeText(getApplicationContext(), "Update Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
             }
-        } catch (Exception e) {
-            Log.i("Response 2:Error:", e.getMessage());
+        } catch (Exception e) {            
             Toast.makeText(getApplicationContext(), "Update Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
         }
     }

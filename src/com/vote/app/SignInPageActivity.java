@@ -20,24 +20,20 @@ public class SignInPageActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("SignInPageActivity", "inside user sign in page");
+        super.onCreate(savedInstanceState);       
         setContentView(R.layout.sign_in);
     }
 
     public void login(View view) {
         final EditText edit = (EditText) findViewById(R.id.emailAddress);
         EditText pwd = (EditText) findViewById(R.id.password);
-        try {
-            Log.i("triggerLogin:", "triggerLogin");
+        try {           
             final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
             postParameters.add(new BasicNameValuePair("username", edit.getText().toString()));
             postParameters.add(new BasicNameValuePair("password", pwd.getText().toString()));
             final Context context = this;
-            try {
-                Log.i("LoginPageActivity", "try");
-                String response = SimpleHttpClient.executeHttpPost("/login", postParameters);
-                Log.i("Response:", response);
+            try {               
+                String response = SimpleHttpClient.executeHttpPost("/login", postParameters);                
                 JSONObject jsonobject = new JSONObject(response);
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
                 SharedPreferences.Editor editor = prefs.edit();
@@ -48,20 +44,16 @@ public class SignInPageActivity extends Activity {
                 editor.putString("mobile", (String) jsonobject.get("mobile"));
                 editor.commit();
                 Intent intent = new Intent(context, SearchActivity.class);
-                startActivity(intent);
-                Log.i("inside otp if loop", "search activity started");
+                startActivity(intent);                
             } catch (Exception e) {
                 Log.e("LoginPageActivity", e.getMessage() + "");
                 Toast.makeText(getApplicationContext(), "Login Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
-            }
-            Log.i("After process:", "Done");
+            }            
         } catch (Exception e) {
         }
     }
 
-    public void forgotPassword(View view) {
-
-        Log.i("inside forgot", " forgot password function");
+    public void forgotPassword(View view) {       
         Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
 

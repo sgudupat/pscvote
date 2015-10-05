@@ -10,8 +10,7 @@ public class UserHomePageActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("UserHomePageActivity", "inside user home landing page");
+        super.onCreate(savedInstanceState);       
         setContentView(R.layout.main);
     }
 

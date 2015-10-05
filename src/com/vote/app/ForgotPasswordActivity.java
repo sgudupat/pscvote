@@ -18,99 +18,104 @@ import java.util.Random;
 
 public class ForgotPasswordActivity extends Activity {
 
-    String generatedOTP;
-    String mobileNumber;
+	String generatedOTP;
+	String mobileNumber;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.i("UserHomePageActivity", "inside user home landing page");
-        setContentView(R.layout.forgot_password);
-    }
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.forgot_password);
+	}
 
-    public void generateOtp(View view) {
-        //Get User information
-        EditText username = (EditText) findViewById(R.id.forgotPassword_username);
-        try {
-            Log.i("triggerLogin:", "triggerLogin");
-            final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-            postParameters.add(new BasicNameValuePair("username", username.getText().toString()));
-            try {
-                Log.i("LoginPageActivity", "try");
-                String response = SimpleHttpClient.executeHttpPost("/getUser", postParameters);
-                Log.i("Response:", response);
-                JSONObject jsonobject = new JSONObject(response);
-                mobileNumber = (String) jsonobject.get("mobile");
-                Log.i("Mobile number:", mobileNumber);
-            } catch (Exception e) {
-                Log.e("LoginPageActivity", e.getMessage() + "");
-                Toast.makeText(getApplicationContext(), "Login Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
-            }
-            Log.i("After process:", "Done");
-        } catch (Exception e) {
-        }
+	public void generateOtp(View view) {
+		// Get User information
+		EditText username = (EditText) findViewById(R.id.forgotPassword_username);
+		try {
+			final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+			postParameters.add(new BasicNameValuePair("username", username
+					.getText().toString()));
+			try {
 
-        //Generate OTP value
-        generatedOTP = generateOTPValue();
-        Log.i("otp password:", generatedOTP);
+				String response = SimpleHttpClient.executeHttpPost("/getUser",
+						postParameters);
+				JSONObject jsonobject = new JSONObject(response);
+				mobileNumber = (String) jsonobject.get("mobile");
+			} catch (Exception e) {
+				Log.e("LoginPageActivity", e.getMessage() + "");
+				Toast.makeText(getApplicationContext(),
+						"Login Failed, Please Retry !!!", Toast.LENGTH_LONG)
+						.show();
+			}
 
-        //Send SMS the OTP that is generated
-        sendSMS(mobileNumber, generatedOTP);
-    }
+		} catch (Exception e) {
+		}
 
-    public void submit(View view) {
-        // get user input and set it to result edit text
-        EditText otpValue = (EditText) findViewById(R.id.forgotPassword_otp);
-        EditText username = (EditText) findViewById(R.id.forgotPassword_username);
-        String aotp = otpValue.getText().toString();
-        Log.i("alert dialog otp", aotp);
-        if (aotp.equals(generatedOTP)) {
-            try {
-                String dynamicPassword = generateDynamicPassword();
-                sendSMS(mobileNumber, dynamicPassword);
-                final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
-                postParameters.add(new BasicNameValuePair("username", username.getText().toString()));
-                postParameters.add(new BasicNameValuePair("password", dynamicPassword));
-                String response = SimpleHttpClient.executeHttpPost("/updatePassword", postParameters);
-                if (response.contains("success")) {
-                    Intent intent = new Intent(this, SignInPageActivity.class);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(), "Reset Password Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
-                }
-                Log.i("inside otp if loop", "search activity started");
-            } catch (Exception e) {
-                Log.e("register", e.getMessage() + "");
-                Toast.makeText(getApplicationContext(), "Reset Password Failed, Please Retry !!!", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
+		// Generate OTP value
+		generatedOTP = generateOTPValue();
 
-    private String generateOTPValue() {
-        String chars = "0123456789";
-        final int PW_LENGTH = 5;
-        Random rnd = new SecureRandom();
-        StringBuilder pass = new StringBuilder();
-        for (int i = 0; i < PW_LENGTH; i++) {
-            pass.append(chars.charAt(rnd.nextInt(chars.length())));
-        }
-        return pass.toString();
-    }
+		// Send SMS the OTP that is generated
+		sendSMS(mobileNumber, generatedOTP);
+	}
 
-    private String generateDynamicPassword() {
-        String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
-        final int PW_LENGTH = 8;
-        Random rnd = new SecureRandom();
-        StringBuilder pass = new StringBuilder();
-        for (int i = 0; i < PW_LENGTH; i++) {
-            pass.append(chars.charAt(rnd.nextInt(chars.length())));
-        }
-        return pass.toString();
-    }
+	public void submit(View view) {
+		// get user input and set it to result edit text
+		EditText otpValue = (EditText) findViewById(R.id.forgotPassword_otp);
+		EditText username = (EditText) findViewById(R.id.forgotPassword_username);
+		String aotp = otpValue.getText().toString();
+		if (aotp.equals(generatedOTP)) {
+			try {
+				String dynamicPassword = generateDynamicPassword();
+				sendSMS(mobileNumber, dynamicPassword);
+				final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
+				postParameters.add(new BasicNameValuePair("username", username
+						.getText().toString()));
+				postParameters.add(new BasicNameValuePair("password",
+						dynamicPassword));
+				String response = SimpleHttpClient.executeHttpPost(
+						"/updatePassword", postParameters);
+				if (response.contains("success")) {
+					Intent intent = new Intent(this, SignInPageActivity.class);
+					startActivity(intent);
+				} else {
+					Toast.makeText(getApplicationContext(),
+							"Reset Password Failed, Please Retry !!!",
+							Toast.LENGTH_LONG).show();
+				}
+			} catch (Exception e) {
+				Log.e("register", e.getMessage() + "");
+				Toast.makeText(getApplicationContext(),
+						"Reset Password Failed, Please Retry !!!",
+						Toast.LENGTH_LONG).show();
+			}
+		}
+	}
 
-    private void sendSMS(String mobileNumber, String smsValue) {
-        SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(mobileNumber, null, smsValue, null, null);
-        Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG).show();
-    }
+	private String generateOTPValue() {
+		String chars = "0123456789";
+		final int PW_LENGTH = 5;
+		Random rnd = new SecureRandom();
+		StringBuilder pass = new StringBuilder();
+		for (int i = 0; i < PW_LENGTH; i++) {
+			pass.append(chars.charAt(rnd.nextInt(chars.length())));
+		}
+		return pass.toString();
+	}
+
+	private String generateDynamicPassword() {
+		String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+		final int PW_LENGTH = 8;
+		Random rnd = new SecureRandom();
+		StringBuilder pass = new StringBuilder();
+		for (int i = 0; i < PW_LENGTH; i++) {
+			pass.append(chars.charAt(rnd.nextInt(chars.length())));
+		}
+		return pass.toString();
+	}
+
+	private void sendSMS(String mobileNumber, String smsValue) {
+		SmsManager smsManager = SmsManager.getDefault();
+		smsManager.sendTextMessage(mobileNumber, null, smsValue, null, null);
+		Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG)
+				.show();
+	}
 }
