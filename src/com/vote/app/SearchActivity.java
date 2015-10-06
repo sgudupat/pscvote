@@ -129,7 +129,8 @@ public class SearchActivity extends Activity {
 			items.clear();
 			// Build the list
 			JSONArray jsonArray = new JSONArray(anchors);
-			for (int i = 0; i < jsonArray.length(); i++) {
+			int jsonArrays=jsonArray.length();
+			for (int i = 0; i < jsonArrays; i++) {
 				JSONObject jsonobject = jsonArray.getJSONObject(i);
 				String aname = jsonobject.getString("anchor_name");
 				String client = jsonobject.getString("client_name");
@@ -139,7 +140,8 @@ public class SearchActivity extends Activity {
 				String clientInfo = jsonobject.getString("client_info");
 				String cname = jsonobject.getString("campaigns");
 				JSONArray jsonArray2 = new JSONArray(cname);
-				for (int j = 0; j < jsonArray2.length(); j++) {
+				int jsonArray3=jsonArray2.length();
+				for (int j = 0; j < jsonArray3; j++) {
 					JSONObject jsonobject2 = jsonArray2.getJSONObject(j);
 					String cid = jsonobject2.getString("campaign_id");
 					String endDate = jsonobject2.getString("end_date"); // 2015-08-04
@@ -195,14 +197,14 @@ public class SearchActivity extends Activity {
 		buildListView();
 	}
 
-	private String getAnchors() {
+	private String getAnchors() {		
 		EditText input = (EditText) findViewById(R.id.inputSearch);
 		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("anchorName", input.getText()
 				.toString()));
 		try {
 			String response2 = SimpleHttpClient.executeHttpPost(
-					"/searchAnchor", postParameters);
+					"/searchAnchor", postParameters);			
 			return response2;
 		} catch (Exception e) {
 			String errorMsg = e.getMessage() + "";
@@ -255,7 +257,8 @@ public class SearchActivity extends Activity {
 			items.clear();
 			// Build the list
 			JSONArray jsonArrayr = new JSONArray(anchors);
-			for (int i = 0; i < jsonArrayr.length(); i++) {
+			int jsonArrays2=jsonArrayr.length();
+			for (int i = 0; i < jsonArrays2; i++) {
 				if (i < 5) {
 					JSONObject jsonobject = jsonArrayr.getJSONObject(i);
 					String aname = jsonobject.getString("anchor_name");
@@ -287,17 +290,15 @@ public class SearchActivity extends Activity {
 		return items;
 	}
 
-	private String getAnchors1() {
+	private String getAnchors1() {		
 
 		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("userName", userName));
 		try {
 			String response2 = SimpleHttpClient.executeHttpPost(
-					"/recentSearchAnchors", postParameters);
+					"/recentSearchAnchors", postParameters);			
 			return response2;
-		} catch (Exception e) {
-			String errorMsg = e.getMessage() + "";
-			Log.e("LoginPageActivity", errorMsg);
+		} catch (Exception e) {			
 			return "fail";
 		}
 	}

@@ -1,7 +1,5 @@
 package com.vote.app;
 
-import android.util.Log;
-
 import java.util.Date;
 
 public class Product {
@@ -90,8 +88,7 @@ public class Product {
 
 	public String isCampaignExpired() {
 		Date currentDate = new Date();
-		String expired = (currentDate.after(campaignEndDate) ? "Y" : "N");
-		Log.i("expired::", expired);
+		String expired = (currentDate.after(campaignEndDate) ? "Y" : "N");		
 		return expired;
 	}
 

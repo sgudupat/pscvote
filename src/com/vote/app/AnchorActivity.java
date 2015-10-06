@@ -71,7 +71,8 @@ public class AnchorActivity extends Activity {
 				selectedOption = campaignJSON.getString("optionValue");
 
 				String optionId, optionValue;
-				for (int i = 0; i < options.length(); i++) {
+				int optionLength=options.length();
+				for (int i = 0; i < optionLength; i++) {
 					JSONObject option = options.getJSONObject(i);
 
 
@@ -133,8 +134,8 @@ public class AnchorActivity extends Activity {
 					}
 				}
 			}
-
-			for (int i = 0; i < options.length(); i++) {
+			int optionLength1=options.length();
+			for (int i = 0; i < optionLength1; i++) {
 				JSONObject option = options.getJSONObject(i);
 
 				if (i == 0) {
@@ -190,14 +191,12 @@ public class AnchorActivity extends Activity {
 		startActivity(intent);
 	}
 
-	private String fetchCampaignInfo(String campaignId) {
-
+	private String fetchCampaignInfo(String campaignId) {		
 		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("campaignId", campaignId));
 		postParameters.add(new BasicNameValuePair("userName", username));
 		try {
-			String response = SimpleHttpClient.executeHttpPost("/getCampaign", postParameters);
-
+			String response = SimpleHttpClient.executeHttpPost("/getCampaign", postParameters);			
 			return response;
 		} catch (Exception e) {
 			Log.e("register", e.getMessage() + "");
@@ -205,17 +204,16 @@ public class AnchorActivity extends Activity {
 		return null;
 	}
 
-	private String submitVote(String userName, String campaignOptionId) {
-
+	private String submitVote(String userName, String campaignOptionId) {		
 		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
 		postParameters.add(new BasicNameValuePair("username", userName));
 		postParameters.add(new BasicNameValuePair("optionId", campaignOptionId));
 		try {
 			String response = null;
 			if (TextUtils.equals(userVoted, "Y")) {
-				postParameters.add(new BasicNameValuePair("oldOptionId", selectedOption));
+				postParameters.add(new BasicNameValuePair("oldOptionId", selectedOption));				
 				response = SimpleHttpClient.executeHttpPost("/resubmitVote", postParameters);
-			} else {
+			} else {				
 				response = SimpleHttpClient.executeHttpPost("/submitVote", postParameters);
 			}
 
@@ -227,9 +225,9 @@ public class AnchorActivity extends Activity {
 	}
 
 	public void onRadioSelected(View view) {
-		RadioGroup options = (RadioGroup) findViewById(R.id.campaign_options);
+		/*RadioGroup options = (RadioGroup) findViewById(R.id.campaign_options);
 		RadioButton option = (RadioButton) findViewById(options.getCheckedRadioButtonId());
-		String hint = (String) option.getHint();
+		String hint = (String) option.getHint();*/
 		//Toast.makeText(getApplicationContext(), "Value:" + hint, Toast.LENGTH_SHORT).show();
 	}
 

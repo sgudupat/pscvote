@@ -30,7 +30,7 @@ public class RewardActivity extends Activity {
 		buildListView();
 	}
 
-	private String rewardDetails() {
+	private String rewardDetails() {		
 		SharedPreferences preferences = PreferenceManager
 				.getDefaultSharedPreferences(this);
 		String sname = preferences.getString("username", "");
@@ -38,11 +38,10 @@ public class RewardActivity extends Activity {
 		postParameters.add(new BasicNameValuePair("username", sname));
 		try {
 			String response2 = SimpleHttpClient.executeHttpPost("/myRewards",
-					postParameters);
+					postParameters);			
 			return response2;
-		} catch (Exception e) {
-			String errorMsg = e.getMessage() + "";
-			Log.e("LoginPageActivity", errorMsg);
+		} catch (Exception e) { 
+
 			return "fail";
 		}
 	}
@@ -82,10 +81,11 @@ public class RewardActivity extends Activity {
 	private ArrayList<Reward> generateData() {
 		String rewardDetail = rewardDetails();
 		JSONArray jsonArray;
-		try {
+		try {	
 			jsonArray = new JSONArray(rewardDetail);
+			int jsonArray1=jsonArray.length();
 
-			for (int i = 0; i < jsonArray.length(); i++) {
+			for (int i = 0; i < jsonArray1; i++) {
 				JSONObject jsonobject = jsonArray.getJSONObject(i);
 				String rname = jsonobject.getString("reward_id");
 				String rdate = jsonobject.getString("start_date");

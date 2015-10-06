@@ -47,14 +47,14 @@ public class CampaignActivity extends Activity {
 		openChart(campaignId);
 	}
 
-	private void openChart(String campaignId) {
+	private void openChart(String campaignId) {		
 		GraphicalView mChartView;
 		String response = "";
 		ArrayList<String> ageRange = new ArrayList<String>();
 		ArrayList<Integer> countValue = new ArrayList<Integer>();
 		TextView anchor = (TextView) findViewById(R.id.textView1);
 		TextView client = (TextView) findViewById(R.id.client);
-
+       
 		int count = 0;
 
 		final ArrayList<NameValuePair> postParameters = new ArrayList<NameValuePair>();
@@ -71,7 +71,8 @@ public class CampaignActivity extends Activity {
 			client.setText(clname);
 			String Value = jsonobject.getString("values");
 			JSONArray jsonArray2 = new JSONArray(Value);
-			for (int j = 0; j < jsonArray2.length(); j++) {
+			int jsonArray3=jsonArray2.length();
+			for (int j = 0; j < jsonArray3; j++) {
 
 				jsonobject = jsonArray2.getJSONObject(j);
 
@@ -82,6 +83,7 @@ public class CampaignActivity extends Activity {
 				count = Integer.parseInt(cntValue);
 				ageRange.add(ager);
 				countValue.add(count);
+				
 			}
 		} catch (Exception e) {
 
@@ -94,14 +96,16 @@ public class CampaignActivity extends Activity {
 		// Instantiating CategorySeries to plot Pie Chart
 		CategorySeries distributionSeries = new CategorySeries(
 				"Campaign Statistics");
-		for (Integer i = 0; i < countValue.size(); i++) {
+		int countValueSize= countValue.size();
+		for (Integer i = 0; i < countValueSize; i++) {
 			// Adding a slice with its values and name to the Pie Chart
 			distributionSeries.add(ageRange.get(i), countValue.get(i));
 		}
 
 		// Instantiating a renderer for the Pie Chart
 		DefaultRenderer defaultRenderer = new DefaultRenderer();
-		for (Integer i = 0; i < countValue.size(); i++) {
+		int countValueSize1=countValue.size();
+		for (Integer i = 0; i < countValueSize1; i++) {
 			SimpleSeriesRenderer seriesRenderer = new SimpleSeriesRenderer();
 			seriesRenderer.setColor(colors[i]);
 			seriesRenderer.setDisplayChartValues(true);

@@ -94,7 +94,7 @@ public class ForgotPasswordActivity extends Activity {
 		String chars = "0123456789";
 		final int PW_LENGTH = 5;
 		Random rnd = new SecureRandom();
-		StringBuilder pass = new StringBuilder();
+		StringBuilder pass = new StringBuilder();		
 		for (int i = 0; i < PW_LENGTH; i++) {
 			pass.append(chars.charAt(rnd.nextInt(chars.length())));
 		}
@@ -116,6 +116,6 @@ public class ForgotPasswordActivity extends Activity {
 		SmsManager smsManager = SmsManager.getDefault();
 		smsManager.sendTextMessage(mobileNumber, null, smsValue, null, null);
 		Toast.makeText(getApplicationContext(), "SMS Sent!", Toast.LENGTH_LONG)
-				.show();
+		.show();
 	}
 }
