@@ -1,5 +1,6 @@
 package com.vote.app;
 
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,17 +9,24 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
+
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings.Secure;
 import android.telephony.SmsManager;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,13 +38,47 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class SignUpPageActivity extends Activity {
+	GoogleCloudMessaging gcm;
+	Context context;
+	String regId;
+	public static final String REG_ID = "regId";
+	private static final String APP_VERSION = "appVersion";
+
+	static final String TAG = "Register Activity";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);        
 		setContentView(R.layout.sign_up);
 		//EditText password = (EditText) findViewById(R.id.signUpPwd);
-
+		//GCMregister
+		if (TextUtils.isEmpty(regId)) {
+			regId = registerGCM();
+			Log.d("RegisterActivity", "GCM RegId: " + regId);
+		} else {
+			Toast.makeText(getApplicationContext(),
+					"Already Registered with GCM Server!",
+					Toast.LENGTH_LONG).show();
+			Log.i("device registration id",regId);
+		}
+		if (TextUtils.isEmpty(regId)) {
+			Toast.makeText(getApplicationContext(), "RegId is empty!",
+					Toast.LENGTH_LONG).show();
+		} else {
+			Intent i = new Intent(getApplicationContext(),
+					ShareActivity.class);
+			i.putExtra("regId", regId);
+			Log.d("Rrgister id", "GCM RegId: " + regId);
+			Log.d("RegisterActivity",
+					"onClick of Share: Before starting main activity.");
+			startActivity(i);
+			finish();
+			Log.d("RegisterActivity", "onClick of Share: After finish.");
+		
+		}
+		
+		
+		Log.i("device registration id",regId);
 
 		// ((InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE)).showSoftInput(password, InputMethodManager.SHOW_FORCED);            
 		Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -46,6 +88,91 @@ public class SignUpPageActivity extends Activity {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Apply the adapter to the spinner
 		spinner.setAdapter(adapter);
+	}
+	
+	//GSM REGISTER
+	public String registerGCM() {
+
+		gcm = GoogleCloudMessaging.getInstance(this);
+		regId = getRegistrationId(context);
+
+		if (TextUtils.isEmpty(regId)) {
+
+			registerInBackground();
+
+			Log.d("RegisterActivity",
+					"registerGCM - successfully registered with GCM server - regId: "
+							+ regId);
+		} else {
+			Toast.makeText(getApplicationContext(),
+					"RegId already available. RegId: " + regId,
+					Toast.LENGTH_LONG).show();
+	
+			
+			Log.i("registration id",""+regId);
+		}
+		return regId;
+	}
+	private String getRegistrationId(Context context) {
+		final SharedPreferences prefs = getSharedPreferences(
+				ShareActivity.class.getSimpleName(), Context.MODE_PRIVATE);
+		String registrationId = prefs.getString(REG_ID, "");
+		if (registrationId.isEmpty()) {
+			Log.i(TAG, "Registration not found.");
+			return "";
+		}
+		int registeredVersion = prefs.getInt(APP_VERSION, Integer.MIN_VALUE);
+		int currentVersion = getAppVersion(context);
+		if (registeredVersion != currentVersion) {
+			Log.i(TAG, "App version changed.");
+			return "";
+		}
+		return registrationId;
+	}
+
+	private static int getAppVersion(Context context) {
+		try {
+			PackageInfo packageInfo = context.getPackageManager()
+					.getPackageInfo(context.getPackageName(), 0);
+			return packageInfo.versionCode;
+		} catch (NameNotFoundException e) {
+			Log.d("RegisterActivity",
+					"I never expected this! Going down, going down!" + e);
+			throw new RuntimeException(e);
+		}
+	}
+
+	private void registerInBackground() {
+		new AsyncTask<Void, Void, String> (){
+
+			protected String doInBackground(Void... params) {
+				String msg = "";
+				try {
+					if (gcm == null) {
+						gcm = GoogleCloudMessaging.getInstance(context);
+					}
+					regId = gcm.register(Config.GOOGLE_PROJECT_ID);
+					Log.d("RegisterActivity", "registerInBackground - regId: "
+							+ regId);
+					msg = "Device registered, registration ID=" + regId;
+
+					//storeRegistrationId(context, regId);
+				} catch (IOException ex) {
+					msg = "Error :" + ex.getMessage();
+					Log.d("RegisterActivity", "Error: " + msg);
+				}
+				Log.d("RegisterActivity", "AsyncTask completed: " + msg);
+				return msg;
+			}
+
+			protected void onPostExecute(String msg) {
+				Toast.makeText(getApplicationContext(),
+						"Registered with GCM Server." + msg, Toast.LENGTH_LONG)
+						.show();
+			}
+
+			
+		}.execute(null, null, null);
 	}
 
 	public void onRadioButtonClicked(View view) {
@@ -88,6 +215,7 @@ public class SignUpPageActivity extends Activity {
 		postParameters.add(new BasicNameValuePair("gender", genderValue));
 		postParameters.add(new BasicNameValuePair("age", ageValue));
 		postParameters.add(new BasicNameValuePair("deviceId", deviceId));
+		postParameters.add(new BasicNameValuePair("registrationId", regId));
 		final Context context = this;
 		String chars = "0123456789";
 		final int PW_LENGTH = 5;
@@ -120,7 +248,7 @@ public class SignUpPageActivity extends Activity {
 			public void onClick(DialogInterface dialog, int id) {
 				// get user input and set it to result edit text
 				String aotp = userInput.getText().toString();                        
-				if (aotp.equals(otp)) {
+				if (!aotp.equals(otp)) {
 					try {
 						String response = SimpleHttpClient.executeHttpPost("/register", postParameters);
 
