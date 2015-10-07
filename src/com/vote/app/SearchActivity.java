@@ -77,7 +77,7 @@ public class SearchActivity extends Activity {
 							SharedPreferences preferences = PreferenceManager
 									.getDefaultSharedPreferences(SearchActivity.this);
 							preferences.edit().clear().commit();
-							finish();
+                            launchIntent();
 						}
 					});
 			// Setting Negative "NO" Button
@@ -93,6 +93,14 @@ public class SearchActivity extends Activity {
 		}
 		return true;
 	}
+	  protected void launchIntent() {
+			// TODO Auto-generated method stub
+	    	Intent intent = new Intent(this, UserHomePageActivity.class);
+	    	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); 
+	    	intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    	startActivity(intent);
+			
+		}
 
 	private void buildListView() {
 		ListView listView = (ListView) findViewById(R.id.list_view);
