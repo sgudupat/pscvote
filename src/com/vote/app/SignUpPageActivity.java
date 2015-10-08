@@ -248,7 +248,7 @@ public class SignUpPageActivity extends Activity {
 			public void onClick(DialogInterface dialog, int id) {
 				// get user input and set it to result edit text
 				String aotp = userInput.getText().toString();                        
-				if (!aotp.equals(otp)) {
+				if (aotp.equals(otp)) {
 					try {
 						String response = SimpleHttpClient.executeHttpPost("/register", postParameters);
 
